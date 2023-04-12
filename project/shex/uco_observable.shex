@@ -1,0 +1,4309 @@
+BASE <https://w3id.org/lmodel/uco-observable/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX collections: <https://w3id.org/lmodel/collections/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX action: <https://w3id.org/lmodel/uco-action/>
+PREFIX configuration: <https://w3id.org/lmodel/uco-configuration/>
+PREFIX core: <https://w3id.org/lmodel/uco-core/>
+PREFIX identity: <https://w3id.org/lmodel/uco-identity/>
+PREFIX location: <https://w3id.org/lmodel/uco-location/>
+PREFIX pattern: <https://w3id.org/lmodel/uco-pattern/>
+PREFIX types: <https://w3id.org/lmodel/uco-types/>
+PREFIX vocabulary: <https://w3id.org/lmodel/uco-vocabulary/>
+
+
+<Base64BinaryType> xsd:base64Binary
+
+<ByteType> xsd:byte
+
+<PositiveIntegerType> xsd:positiveInteger
+
+<UnsignedIntegerType> xsd:unsignedInt
+
+<UnsignedShortType> xsd:unsignedShort
+
+<DurationType> xsd:duration
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:dateTime
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+collections:PositiveInteger xsd:positiveInteger
+
+core:StringType xsd:string
+
+core:LiteralType rdf:literal
+
+core:NonNegativeIntegerType xsd:nonNegativeInteger
+
+core:StatementType xsd:string
+
+core:IriType IRI
+
+core:BooleanType xsd:boolean
+
+core:HexBinaryType xsd:hexBinary
+
+location:DecimalType xsd:decimal
+
+<Account>  (
+    CLOSED {
+       (  $<Account_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Account> ] ?
+       )
+    } OR @<DigitalAccount>
+)
+
+<AccountAuthenticationFacet> CLOSED {
+    (  $<AccountAuthenticationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <passwordLastChanged> @linkml:Datetime ? ;
+          <password> @linkml:String ? ;
+          <passwordType> @linkml:String ?
+       ) ;
+       rdf:type [ <AccountAuthenticationFacet> ] ?
+    )
+}
+
+<AccountFacet> CLOSED {
+    (  $<AccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <accountIssuer> @core:UcoObject ? ;
+          <owner> @core:UcoObject ? ;
+          <isActive> @core:BooleanType ? ;
+          <expirationDate> @linkml:Datetime ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <accountIdentifier> @linkml:String ? ;
+          <accountType> @linkml:String ?
+       ) ;
+       rdf:type [ <AccountFacet> ] ?
+    )
+}
+
+action:Action  (
+    CLOSED {
+       (  $action:Action_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ? ;
+             action:subaction @action:Action * ;
+             action:environment @core:UcoObject ? ;
+             action:performer @core:UcoObject ? ;
+             action:error @core:UcoObject * ;
+             action:instrument @core:UcoObject * ;
+             core:object @core:UcoObject * ;
+             action:participant @core:UcoObject * ;
+             action:result @core:UcoObject * ;
+             action:location @location:Location * ;
+             core:endTime @linkml:Datetime ? ;
+             core:startTime @linkml:Datetime ? ;
+             action:actionCount @core:NonNegativeIntegerType ? ;
+             action:actionStatus @vocabulary:ActionStatusTypeEnum ?
+          ) ;
+          rdf:type [ action:Action ] ?
+       )
+    } OR @action:ActionLifecycle OR @action:ActionPattern OR @<ObservableAction> OR @<Observation>
+)
+
+action:ActionArgumentFacet CLOSED {
+    (  $action:ActionArgumentFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          action:argumentName @linkml:String ;
+          core:value @linkml:String
+       ) ;
+       rdf:type [ action:ActionArgumentFacet ] ?
+    )
+}
+
+action:ActionEstimationFacet CLOSED {
+    (  $action:ActionEstimationFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          action:estimatedCost @linkml:String ? ;
+          action:estimatedEfficacy @linkml:String ? ;
+          action:estimatedImpact @linkml:String ? ;
+          action:objective @linkml:String ?
+       ) ;
+       rdf:type [ action:ActionEstimationFacet ] ?
+    )
+}
+
+action:ActionFrequencyFacet CLOSED {
+    (  $action:ActionFrequencyFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          action:rate @location:DecimalType ;
+          action:scale @linkml:String ;
+          action:units @linkml:String ;
+          action:trend @vocabulary:TrendEnum
+       ) ;
+       rdf:type [ action:ActionFrequencyFacet ] ?
+    )
+}
+
+action:ActionLifecycle CLOSED {
+    (  $action:ActionLifecycle_tes (  &action:Action_tes ;
+          rdf:type [ action:Action ] ? ;
+          action:phase @action:ArrayOfAction ;
+          action:error @core:UcoObject ? ;
+          core:endTime @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ? ;
+          action:actionCount @core:NonNegativeIntegerType ? ;
+          action:actionStatus @vocabulary:ActionStatusTypeEnum ?
+       ) ;
+       rdf:type [ action:ActionLifecycle ] ?
+    )
+}
+
+action:ActionPattern CLOSED {
+    (  $action:ActionPattern_tes (  &action:Action_tes ;
+          rdf:type [ action:Action ] ? ;
+          &pattern:Pattern_tes ;
+          rdf:type [ pattern:Pattern ] ?
+       ) ;
+       rdf:type [ action:ActionPattern ] ?
+    )
+}
+
+<Adaptor> CLOSED {
+    (  $<Adaptor_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <Adaptor> ] ?
+    )
+}
+
+<Address>  (
+    CLOSED {
+       (  $<Address_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Address> ] ?
+       )
+    } OR @<DigitalAddress> OR @<SocketAddress>
+)
+
+identity:AddressFacet CLOSED {
+    (  $identity:AddressFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ? ;
+          identity:address @location:Location ?
+       ) ;
+       rdf:type [ identity:AddressFacet ] ?
+    )
+}
+
+identity:AffiliationFacet CLOSED {
+    (  $identity:AffiliationFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:AffiliationFacet ] ?
+    )
+}
+
+<AlternateDataStream> CLOSED {
+    (  $<AlternateDataStream_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <AlternateDataStream> ] ?
+    )
+}
+
+<AlternateDataStreamFacet> CLOSED {
+    (  $<AlternateDataStreamFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <hashes> @types:Hash ? ;
+          rdfs:label @linkml:String ? ;
+          collections:size @collections:PositiveInteger ?
+       ) ;
+       rdf:type [ <AlternateDataStreamFacet> ] ?
+    )
+}
+
+<AndroidDevice>  (
+    CLOSED {
+       (  $<AndroidDevice_tes> (  &<Device_tes> ;
+             rdf:type [ <Device> ] ?
+          ) ;
+          rdf:type [ <AndroidDevice> ] ?
+       )
+    } OR @<AndroidPhone>
+)
+
+<AndroidDeviceFacet> CLOSED {
+    (  $<AndroidDeviceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <androidFingerprint> @linkml:String ? ;
+          <androidVersion> @linkml:String ? ;
+          <androidID> @core:HexBinaryType ? ;
+          <isADBRootEnabled> @core:BooleanType ? ;
+          <isSURootEnabled> @core:BooleanType ?
+       ) ;
+       rdf:type [ <AndroidDeviceFacet> ] ?
+    )
+}
+
+<AndroidPhone> CLOSED {
+    (  $<AndroidPhone_tes> (  &<AndroidDevice_tes> ;
+          rdf:type [ <AndroidDevice> ] ? ;
+          &<SmartPhone_tes> ;
+          rdf:type [ <SmartPhone> ] ?
+       ) ;
+       rdf:type [ <AndroidPhone> ] ?
+    )
+}
+
+core:Annotation CLOSED {
+    (  $core:Annotation_tes (  &core:Assertion_tes ;
+          rdf:type [ core:Assertion ] ? ;
+          core:object @core:UcoObject +
+       ) ;
+       rdf:type [ core:Annotation ] ?
+    )
+}
+
+<AntennaFacet> CLOSED {
+    (  $<AntennaFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <antennaHeight> @location:DecimalType ? ;
+          <azimuth> @location:DecimalType ? ;
+          <elevation> @location:DecimalType ? ;
+          <horizontalBeamWidth> @location:DecimalType ? ;
+          <signalStrength> @location:DecimalType ? ;
+          <skew> @location:DecimalType ?
+       ) ;
+       rdf:type [ <AntennaFacet> ] ?
+    )
+}
+
+<API> CLOSED {
+    (  $<API_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <API> ] ?
+    )
+}
+
+<AppleDevice>  (
+    CLOSED {
+       (  $<AppleDevice_tes> (  &<Device_tes> ;
+             rdf:type [ <Device> ] ?
+          ) ;
+          rdf:type [ <AppleDevice> ] ?
+       )
+    } OR @<IPhone>
+)
+
+<Appliance>  (
+    CLOSED {
+       (  $<Appliance_tes> (  &<Device_tes> ;
+             rdf:type [ <Device> ] ?
+          ) ;
+          rdf:type [ <Appliance> ] ?
+       )
+    } OR @<NetworkAppliance> OR @<SecurityAppliance>
+)
+
+<Application> CLOSED {
+    (  $<Application_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Application> ] ?
+    )
+}
+
+<ApplicationAccount> CLOSED {
+    (  $<ApplicationAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <ApplicationAccount> ] ?
+    )
+}
+
+<ApplicationAccountFacet> CLOSED {
+    (  $<ApplicationAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <ApplicationAccountFacet> ] ?
+    )
+}
+
+<ApplicationFacet> CLOSED {
+    (  $<ApplicationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <numberOfLaunches> @linkml:Integer ? ;
+          <applicationIdentifier> @linkml:String ? ;
+          <installedVersionHistory> @<ApplicationVersion> * ;
+          <operatingSystem> @<ObservableObject> ? ;
+          <version> @linkml:String ?
+       ) ;
+       rdf:type [ <ApplicationFacet> ] ?
+    )
+}
+
+<ApplicationVersion> CLOSED {
+    (  $<ApplicationVersion_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <installDate> @linkml:Datetime ? ;
+          <uninstallDate> @linkml:Datetime ? ;
+          <version> @linkml:String ?
+       ) ;
+       rdf:type [ <ApplicationVersion> ] ?
+    )
+}
+
+<ArchiveFile> CLOSED {
+    (  $<ArchiveFile_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <ArchiveFile> ] ?
+    )
+}
+
+<ArchiveFileFacet> CLOSED {
+    (  $<ArchiveFileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <archiveType> @linkml:String ? ;
+          <comment> @linkml:String ? ;
+          <version> @linkml:String ?
+       ) ;
+       rdf:type [ <ArchiveFileFacet> ] ?
+    )
+}
+
+<ARPCache> CLOSED {
+    (  $<ARPCache_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ARPCache> ] ?
+    )
+}
+
+<ARPCacheEntry> CLOSED {
+    (  $<ARPCacheEntry_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ARPCacheEntry> ] ?
+    )
+}
+
+action:ArrayOfAction CLOSED {
+    (  $action:ArrayOfAction_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          action:action @action:Action ?
+       ) ;
+       rdf:type [ action:ArrayOfAction ] ?
+    )
+}
+
+core:Assertion  (
+    CLOSED {
+       (  $core:Assertion_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ? ;
+             core:statement @linkml:String *
+          ) ;
+          rdf:type [ core:Assertion ] ?
+       )
+    } OR @core:Annotation
+)
+
+core:AttributedName CLOSED {
+    (  $core:AttributedName_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ? ;
+          core:namingAuthority @linkml:String ?
+       ) ;
+       rdf:type [ core:AttributedName ] ?
+    )
+}
+
+<Audio> CLOSED {
+    (  $<Audio_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Audio> ] ?
+    )
+}
+
+<AudioFacet> CLOSED {
+    (  $<AudioFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <bitRate> @linkml:Integer ? ;
+          <duration> @linkml:Integer ? ;
+          <audioType> @linkml:String ? ;
+          <format> @linkml:String ?
+       ) ;
+       rdf:type [ <AudioFacet> ] ?
+    )
+}
+
+<AutonomousSystem> CLOSED {
+    (  $<AutonomousSystem_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <AutonomousSystem> ] ?
+    )
+}
+
+<AutonomousSystemFacet> CLOSED {
+    (  $<AutonomousSystemFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <number> @linkml:Integer ? ;
+          <asHandle> @linkml:String ? ;
+          <regionalInternetRegistry> @linkml:String ?
+       ) ;
+       rdf:type [ <AutonomousSystemFacet> ] ?
+    )
+}
+
+collections:Bag  (
+    CLOSED {
+       (  $collections:Bag_tes (  &collections:Collection_tes ;
+             rdf:type [ collections:Collection ] ?
+          ) ;
+          rdf:type [ collections:Bag ] ?
+       )
+    } OR @collections:List OR @types:Thread
+)
+
+identity:BirthInformationFacet CLOSED {
+    (  $identity:BirthInformationFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ? ;
+          identity:birthdate @linkml:Datetime ?
+       ) ;
+       rdf:type [ identity:BirthInformationFacet ] ?
+    )
+}
+
+<BlackBerryPhone> CLOSED {
+    (  $<BlackBerryPhone_tes> (  &<SmartPhone_tes> ;
+          rdf:type [ <SmartPhone> ] ?
+       ) ;
+       rdf:type [ <BlackBerryPhone> ] ?
+    )
+}
+
+<BlockDeviceNode> CLOSED {
+    (  $<BlockDeviceNode_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <BlockDeviceNode> ] ?
+    )
+}
+
+<BluetoothAddress> CLOSED {
+    (  $<BluetoothAddress_tes> (  &<MACAddress_tes> ;
+          rdf:type [ <MACAddress> ] ?
+       ) ;
+       rdf:type [ <BluetoothAddress> ] ?
+    )
+}
+
+<BluetoothAddressFacet> CLOSED {
+    (  $<BluetoothAddressFacet_tes> (  &<MACAddressFacet_tes> ;
+          rdf:type [ <MACAddressFacet> ] ?
+       ) ;
+       rdf:type [ <BluetoothAddressFacet> ] ?
+    )
+}
+
+<BotConfiguration> CLOSED {
+    (  $<BotConfiguration_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <BotConfiguration> ] ?
+    )
+}
+
+<BrowserBookmark> CLOSED {
+    (  $<BrowserBookmark_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <BrowserBookmark> ] ?
+    )
+}
+
+<BrowserBookmarkFacet> CLOSED {
+    (  $<BrowserBookmarkFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          <accessedTime> @linkml:Datetime ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <urlTargeted> @core:IriType * ;
+          <visitCount> @linkml:Integer ? ;
+          <bookmarkPath> @linkml:String ?
+       ) ;
+       rdf:type [ <BrowserBookmarkFacet> ] ?
+    )
+}
+
+<BrowserCookie> CLOSED {
+    (  $<BrowserCookie_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <BrowserCookie> ] ?
+    )
+}
+
+<BrowserCookieFacet> CLOSED {
+    (  $<BrowserCookieFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <accessedTime> @linkml:Datetime ? ;
+          <application> @<ObservableObject> ? ;
+          <cookieDomain> @<ObservableObject> ? ;
+          <cookieName> @linkml:String ? ;
+          <cookiePath> @linkml:String ? ;
+          <expirationTime> @linkml:Datetime ? ;
+          <isSecure> @core:BooleanType ? ;
+          <observableCreatedTime> @linkml:Datetime ?
+       ) ;
+       rdf:type [ <BrowserCookieFacet> ] ?
+    )
+}
+
+core:Bundle CLOSED {
+    (  $core:Bundle_tes (  &core:EnclosingCompilation_tes ;
+          rdf:type [ core:EnclosingCompilation ] ?
+       ) ;
+       rdf:type [ core:Bundle ] ?
+    )
+}
+
+<Calendar> CLOSED {
+    (  $<Calendar_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Calendar> ] ?
+    )
+}
+
+<CalendarEntry> CLOSED {
+    (  $<CalendarEntry_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <CalendarEntry> ] ?
+    )
+}
+
+<CalendarEntryFacet> CLOSED {
+    (  $<CalendarEntryFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          <attendant> @identity:Identity * ;
+          <isPrivate> @core:BooleanType ? ;
+          core:endTime @linkml:Datetime ? ;
+          action:location @location:Location ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <owner> @core:UcoObject ? ;
+          <remindTime> @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ? ;
+          <duration> @linkml:Integer ? ;
+          <eventStatus> @linkml:String ? ;
+          <eventType> @linkml:String ? ;
+          <recurrence> @linkml:String ? ;
+          <subject> @linkml:String ?
+       ) ;
+       rdf:type [ <CalendarEntryFacet> ] ?
+    )
+}
+
+<CalendarFacet> CLOSED {
+    (  $<CalendarFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <owner> @core:UcoObject ? ;
+          <application> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <CalendarFacet> ] ?
+    )
+}
+
+<Call> CLOSED {
+    (  $<Call_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Call> ] ?
+    )
+}
+
+<CallFacet> CLOSED {
+    (  $<CallFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          core:endTime @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ? ;
+          <duration> @linkml:Integer ? ;
+          action:participant @<ObservableObject> * ;
+          <callType> @linkml:String ? ;
+          <from> @<ObservableObject> ? ;
+          <to> @<ObservableObject> *
+       ) ;
+       rdf:type [ <CallFacet> ] ?
+    )
+}
+
+<CapturedTelecommunicationsInformation> CLOSED {
+    (  $<CapturedTelecommunicationsInformation_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <CapturedTelecommunicationsInformation> ] ?
+    )
+}
+
+<CapturedTelecommunicationsInformationFacet> CLOSED {
+    (  $<CapturedTelecommunicationsInformationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <captureCellSite> @<CellSite> ;
+          core:startTime @linkml:Datetime ? ;
+          core:endTime @linkml:Datetime ? ;
+          <interceptedCallState> @linkml:String ?
+       ) ;
+       rdf:type [ <CapturedTelecommunicationsInformationFacet> ] ?
+    )
+}
+
+<CellSite> CLOSED {
+    (  $<CellSite_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <CellSite> ] ?
+    )
+}
+
+<CellSiteFacet> CLOSED {
+    (  $<CellSiteFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <cellSiteCountryCode> @linkml:String ? ;
+          <cellSiteIdentifier> @linkml:String ? ;
+          <cellSiteLocationAreaCode> @linkml:String ? ;
+          <cellSiteNetworkCode> @linkml:String ? ;
+          <cellSiteType> @linkml:String ?
+       ) ;
+       rdf:type [ <CellSiteFacet> ] ?
+    )
+}
+
+<CharacterDeviceNode> CLOSED {
+    (  $<CharacterDeviceNode_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <CharacterDeviceNode> ] ?
+    )
+}
+
+<Code> CLOSED {
+    (  $<Code_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Code> ] ?
+    )
+}
+
+collections:CoItem  (
+    CLOSED {
+       (  $collections:CoItem_tes (  &collections:Thing_tes ;
+             rdf:type [ collections:Thing ] ? ;
+             collections:itemOf @collections:Bag ?
+          ) ;
+          rdf:type [ collections:CoItem ] ?
+       )
+    } OR @collections:ListItem OR @<ObservableObject>
+)
+
+collections:Collection  (
+    CLOSED {
+       (  $collections:Collection_tes (  &collections:Thing_tes ;
+             rdf:type [ collections:Thing ] ? ;
+             collections:size @collections:PositiveInteger ?
+          ) ;
+          rdf:type [ collections:Collection ] ?
+       )
+    } OR @collections:Bag OR @collections:Set
+)
+
+core:Compilation  (
+    CLOSED {
+       (  $core:Compilation_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ?
+          ) ;
+          rdf:type [ core:Compilation ] ?
+       )
+    } OR @core:ContextualCompilation OR @core:EnclosingCompilation
+)
+
+<CompressedStreamFacet> CLOSED {
+    (  $<CompressedStreamFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <compressionRatio> @location:DecimalType ? ;
+          <compressionMethod> @linkml:String ?
+       ) ;
+       rdf:type [ <CompressedStreamFacet> ] ?
+    )
+}
+
+<Computer>  (
+    @<Laptop> OR @<Server> OR @<Tablet>
+)
+
+<Computer_struct> {
+    (  $<Computer_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <Computer> ] ?
+    )
+}
+
+<ComputerSpecification> CLOSED {
+    (  $<ComputerSpecification_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ComputerSpecification> ] ?
+    )
+}
+
+<ComputerSpecificationFacet> CLOSED {
+    (  $<ComputerSpecificationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <biosDate> @linkml:Datetime ? ;
+          <biosReleaseDate> @linkml:Datetime ? ;
+          <currentSystemDate> @linkml:Datetime ? ;
+          <localTime> @linkml:Datetime ? ;
+          <systemTime> @linkml:Datetime ? ;
+          <availableRam> @linkml:Integer ? ;
+          <totalRam> @linkml:Integer ? ;
+          <biosManufacturer> @linkml:String ? ;
+          <biosSerialNumber> @linkml:String ? ;
+          <biosVersion> @linkml:String ? ;
+          <cpu> @linkml:String ? ;
+          <cpuFamily> @linkml:String ? ;
+          <gpu> @linkml:String ? ;
+          <gpuFamily> @linkml:String ? ;
+          <hostname> @linkml:String ? ;
+          <networkInterface> @<ObservableObject> * ;
+          <processorArchitecture> @linkml:String ? ;
+          <timezoneDST> @linkml:String ? ;
+          <timezoneStandard> @linkml:String ? ;
+          <uptime> @linkml:String ?
+       ) ;
+       rdf:type [ <ComputerSpecificationFacet> ] ?
+    )
+}
+
+core:ConfidenceFacet CLOSED {
+    (  $core:ConfidenceFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          core:confidence @core:NonNegativeIntegerType
+       ) ;
+       rdf:type [ core:ConfidenceFacet ] ?
+    )
+}
+
+configuration:Configuration CLOSED {
+    (  $configuration:Configuration_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ? ;
+          configuration:configurationEntry @configuration:ConfigurationEntry * ;
+          configuration:dependencies @configuration:Dependency * ;
+          configuration:usageContextAssumptions @linkml:String *
+       ) ;
+       rdf:type [ configuration:Configuration ] ?
+    )
+}
+
+configuration:ConfigurationEntry CLOSED {
+    (  $configuration:ConfigurationEntry_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          configuration:itemObject @core:UcoObject * ;
+          configuration:itemDescription @linkml:String ? ;
+          configuration:itemName @linkml:String ? ;
+          configuration:itemType @linkml:String ? ;
+          configuration:itemValue @linkml:String *
+       ) ;
+       rdf:type [ configuration:ConfigurationEntry ] ?
+    )
+}
+
+<ConfiguredSoftware> CLOSED {
+    (  $<ConfiguredSoftware_tes> (  &<Software_tes> ;
+          rdf:type [ <Software> ] ? ;
+          configuration:usesConfiguration @configuration:Configuration ? ;
+          configuration:isConfigurationOf @core:UcoObject ?
+       ) ;
+       rdf:type [ <ConfiguredSoftware> ] ?
+    )
+}
+
+<Contact> CLOSED {
+    (  $<Contact_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Contact> ] ?
+    )
+}
+
+<ContactAddress> CLOSED {
+    (  $<ContactAddress_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <geoLocationAddress> @location:Location ? ;
+          <contactAddressScope> @linkml:String ?
+       ) ;
+       rdf:type [ <ContactAddress> ] ?
+    )
+}
+
+<ContactAffiliation> CLOSED {
+    (  $<ContactAffiliation_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <contactOrganization> @identity:Organization ? ;
+          <organizationLocation> @<ContactAddress> ? ;
+          <contactEmail> @<ContactEmail> ? ;
+          <contactMessaging> @<ContactMessaging> ? ;
+          <contactPhone> @<ContactPhone> ? ;
+          <contactProfile> @<ContactProfile> ? ;
+          <contactURL> @<ContactURL> ? ;
+          <organizationDepartment> @linkml:String ? ;
+          <organizationPosition> @linkml:String ?
+       ) ;
+       rdf:type [ <ContactAffiliation> ] ?
+    )
+}
+
+<ContactEmail> CLOSED {
+    (  $<ContactEmail_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <emailAddress> @<ObservableObject> ? ;
+          <contactEmailScope> @vocabulary:ContactEmailScopeEnum ?
+       ) ;
+       rdf:type [ <ContactEmail> ] ?
+    )
+}
+
+<ContactFacet>  (
+    CLOSED {
+       (  $<ContactFacet_tes> (  &core:Facet_tes ;
+             rdf:type [ core:Facet ] ? ;
+             <contactAddress> @<ContactAddress> ? ;
+             <contactAffiliation> @<ContactAffiliation> ? ;
+             <contactEmail> @<ContactEmail> ? ;
+             <contactMessaging> @<ContactMessaging> ? ;
+             <contactPhone> @<ContactPhone> ? ;
+             <contactProfile> @<ContactProfile> ? ;
+             <contactSIP> @<ContactSIP> ? ;
+             <contactURL> @<ContactURL> ? ;
+             <sourceApplication> @<ObservableObject> ? ;
+             identity:birthdate @linkml:Datetime ? ;
+             <lastTimeContacted> @linkml:Datetime ? ;
+             <numberTimesContacted> @linkml:Integer ? ;
+             <contactID> @linkml:String ? ;
+             <displayName> @linkml:String ? ;
+             <firstName> @linkml:String ? ;
+             <lastName> @linkml:String ? ;
+             <middleName> @linkml:String ? ;
+             <namePhonetic> @linkml:String ? ;
+             <namePrefix> @linkml:String ? ;
+             <nameSuffix> @linkml:String ? ;
+             <contactGroup> @linkml:String ? ;
+             <contactNote> @linkml:String ? ;
+             <nickname> @linkml:String ?
+          ) ;
+          rdf:type [ <ContactFacet> ] ?
+       )
+    } OR @<WhoisContactFacet>
+)
+
+<ContactList> CLOSED {
+    (  $<ContactList_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ContactList> ] ?
+    )
+}
+
+<ContactListFacet> CLOSED {
+    (  $<ContactListFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <sourceApplication> @<ObservableObject> ? ;
+          <contact> @<ObservableObject> *
+       ) ;
+       rdf:type [ <ContactListFacet> ] ?
+    )
+}
+
+<ContactMessaging> CLOSED {
+    (  $<ContactMessaging_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <contactMessagingPlatform> @<ObservableObject> ? ;
+          <messagingAddress> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <ContactMessaging> ] ?
+    )
+}
+
+<ContactPhone> CLOSED {
+    (  $<ContactPhone_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <contactPhoneNumber> @<ObservableObject> ? ;
+          <contactPhoneScope> @linkml:String ?
+       ) ;
+       rdf:type [ <ContactPhone> ] ?
+    )
+}
+
+<ContactProfile> CLOSED {
+    (  $<ContactProfile_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <contactProfilePlatform> @<ObservableObject> ? ;
+          <profile> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <ContactProfile> ] ?
+    )
+}
+
+<ContactSIP> CLOSED {
+    (  $<ContactSIP_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <sipAddress> @<ObservableObject> ? ;
+          <contactSIPScope> @linkml:String ?
+       ) ;
+       rdf:type [ <ContactSIP> ] ?
+    )
+}
+
+<ContactURL> CLOSED {
+    (  $<ContactURL_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <contactURLScope> @linkml:String ? ;
+          <url> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <ContactURL> ] ?
+    )
+}
+
+<ContentData> CLOSED {
+    (  $<ContentData_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ContentData> ] ?
+    )
+}
+
+<ContentDataFacet> CLOSED {
+    (  $<ContentDataFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <dataPayloadReferenceURL> @<ObservableObject> ? ;
+          <hash> @types:Hash * ;
+          <isEncrypted> @core:BooleanType ? ;
+          <entropy> @location:DecimalType ? ;
+          <sizeInBytes> @linkml:Integer ? ;
+          <dataPayload> @linkml:String ? ;
+          <magicNumber> @linkml:String ? ;
+          <mimeClass> @linkml:String ? ;
+          <mimeType> @linkml:String * ;
+          <byteOrder> @linkml:String ?
+       ) ;
+       rdf:type [ <ContentDataFacet> ] ?
+    )
+}
+
+core:ContextualCompilation  (
+    CLOSED {
+       (  $core:ContextualCompilation_tes (  &core:Compilation_tes ;
+             rdf:type [ core:Compilation ] ? ;
+             core:object @core:UcoObject +
+          ) ;
+          rdf:type [ core:ContextualCompilation ] ?
+       )
+    } OR @core:Grouping
+)
+
+types:ControlledDictionary CLOSED {
+    (  $types:ControlledDictionary_tes (  &types:Dictionary_tes ;
+          rdf:type [ types:Dictionary ] ? ;
+          types:entry @types:DictionaryEntry *
+       ) ;
+       rdf:type [ types:ControlledDictionary ] ?
+    )
+}
+
+types:ControlledDictionaryEntry CLOSED {
+    (  $types:ControlledDictionaryEntry_tes (  &types:DictionaryEntry_tes ;
+          rdf:type [ types:DictionaryEntry ] ?
+       ) ;
+       rdf:type [ types:ControlledDictionaryEntry ] ?
+    )
+}
+
+core:ControlledVocabulary CLOSED {
+    (  $core:ControlledVocabulary_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ? ;
+          core:constrainingVocabularyReference @core:IriType ? ;
+          core:constrainingVocabularyName @linkml:String ? ;
+          core:value @linkml:String
+       ) ;
+       rdf:type [ core:ControlledVocabulary ] ?
+    )
+}
+
+<CookieHistory> CLOSED {
+    (  $<CookieHistory_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <CookieHistory> ] ?
+    )
+}
+
+identity:CountryOfResidenceFacet CLOSED {
+    (  $identity:CountryOfResidenceFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:CountryOfResidenceFacet ] ?
+    )
+}
+
+<Credential> CLOSED {
+    (  $<Credential_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Credential> ] ?
+    )
+}
+
+<CredentialDump> CLOSED {
+    (  $<CredentialDump_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <CredentialDump> ] ?
+    )
+}
+
+<DataRangeFacet> CLOSED {
+    (  $<DataRangeFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <rangeOffset> @linkml:Integer ? ;
+          <rangeSize> @linkml:Integer ? ;
+          <rangeOffsetType> @linkml:String ?
+       ) ;
+       rdf:type [ <DataRangeFacet> ] ?
+    )
+}
+
+<DefinedEffectFacet>  (
+    CLOSED {
+       (  $<DefinedEffectFacet_tes> (  &core:Facet_tes ;
+             rdf:type [ core:Facet ] ?
+          ) ;
+          rdf:type [ <DefinedEffectFacet> ] ?
+       )
+    } OR @<PropertiesEnumeratedEffectFacet> OR @<PropertyReadEffectFacet> OR @<SendControlCodeEffectFacet> OR
+    @<StateChangeEffectFacet> OR @<ValuesEnumeratedEffectFacet>
+)
+
+configuration:Dependency CLOSED {
+    (  $configuration:Dependency_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          configuration:dependencyDescription @linkml:String ? ;
+          configuration:dependencyType @linkml:String ?
+       ) ;
+       rdf:type [ configuration:Dependency ] ?
+    )
+}
+
+<Device>  (
+    CLOSED {
+       (  $<Device_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Device> ] ?
+       )
+    } OR @<Adaptor> OR @<AndroidDevice> OR @<AppleDevice> OR @<Appliance> OR @<Computer> OR @<DigitalCamera> OR @<EmbeddedDevice>
+    OR @<GamingConsole> OR @<MobileDevice> OR @<ProtocolConverter> OR @<SIMCard> OR @<SmartDevice> OR @<StorageMedium> OR
+    @<WriteBlocker>
+)
+
+<DeviceFacet> CLOSED {
+    (  $<DeviceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <manufacturer> @identity:Identity ? ;
+          <deviceType> @linkml:String ? ;
+          <model> @linkml:String ? ;
+          <serialNumber> @linkml:String ?
+       ) ;
+       rdf:type [ <DeviceFacet> ] ?
+    )
+}
+
+types:Dictionary  (
+    CLOSED {
+       (  $types:Dictionary_tes (  &core:UcoInherentCharacterizationThing_tes ;
+             rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+             types:entry @types:DictionaryEntry +
+          ) ;
+          rdf:type [ types:Dictionary ] ?
+       )
+    } OR @types:ControlledDictionary
+)
+
+types:DictionaryEntry  (
+    CLOSED {
+       (  $types:DictionaryEntry_tes (  &core:UcoInherentCharacterizationThing_tes ;
+             rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+             types:key @linkml:String ;
+             core:value @linkml:String
+          ) ;
+          rdf:type [ types:DictionaryEntry ] ?
+       )
+    } OR @types:ControlledDictionaryEntry
+)
+
+<DigitalAccount>  (
+    CLOSED {
+       (  $<DigitalAccount_tes> (  &<Account_tes> ;
+             rdf:type [ <Account> ] ?
+          ) ;
+          rdf:type [ <DigitalAccount> ] ?
+       )
+    } OR @<ApplicationAccount> OR @<EmailAccount> OR @<MobileAccount> OR @<PhoneAccount> OR @<UNIXAccount> OR @<UserAccount> OR
+    @<WindowsAccount> OR @<WindowsActiveDirectoryAccount>
+)
+
+<DigitalAccountFacet> CLOSED {
+    (  $<DigitalAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isDisabled> @core:BooleanType ? ;
+          <firstLoginTime> @linkml:Datetime ? ;
+          <lastLoginTime> @linkml:Datetime ? ;
+          <displayName> @linkml:String ? ;
+          <accountLogin> @linkml:String *
+       ) ;
+       rdf:type [ <DigitalAccountFacet> ] ?
+    )
+}
+
+<DigitalAddress>  (
+    CLOSED {
+       (  $<DigitalAddress_tes> (  &<Address_tes> ;
+             rdf:type [ <Address> ] ?
+          ) ;
+          rdf:type [ <DigitalAddress> ] ?
+       )
+    } OR @<EmailAddress> OR @<IPAddress> OR @<InstantMessagingAddress> OR @<MACAddress> OR @<SIPAaddress>
+)
+
+<DigitalAddressFacet>  (
+    CLOSED {
+       (  $<DigitalAddressFacet_tes> (  &core:Facet_tes ;
+             rdf:type [ core:Facet ] ? ;
+             <addressValue> @linkml:String ? ;
+             <displayName> @linkml:String ?
+          ) ;
+          rdf:type [ <DigitalAddressFacet> ] ?
+       )
+    } OR @<EmailAddressFacet> OR @<IPAddressFacet> OR @<InstantMessagingAddressFacet> OR @<MACAddressFacet> OR @<SIPAddressFacet>
+)
+
+<DigitalCamera> CLOSED {
+    (  $<DigitalCamera_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <DigitalCamera> ] ?
+    )
+}
+
+<DigitalSignatureInfo> CLOSED {
+    (  $<DigitalSignatureInfo_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <DigitalSignatureInfo> ] ?
+    )
+}
+
+<DigitalSignatureInfoFacet> CLOSED {
+    (  $<DigitalSignatureInfoFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <certificateSubject> @core:UcoObject ? ;
+          <certificateIssuer> @identity:Identity ? ;
+          <signatureExists> @core:BooleanType ? ;
+          <signatureVerified> @core:BooleanType ? ;
+          <signatureDescription> @linkml:String ?
+       ) ;
+       rdf:type [ <DigitalSignatureInfoFacet> ] ?
+    )
+}
+
+<Directory> CLOSED {
+    (  $<Directory_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <Directory> ] ?
+    )
+}
+
+<Disk> CLOSED {
+    (  $<Disk_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Disk> ] ?
+    )
+}
+
+<DiskFacet> CLOSED {
+    (  $<DiskFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <partition> @<ObservableObject> * ;
+          <diskSize> @linkml:Integer ? ;
+          <freeSpace> @linkml:Integer ? ;
+          <diskType> @linkml:String ?
+       ) ;
+       rdf:type [ <DiskFacet> ] ?
+    )
+}
+
+<DiskPartition> CLOSED {
+    (  $<DiskPartition_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <DiskPartition> ] ?
+    )
+}
+
+<DiskPartitionFacet> CLOSED {
+    (  $<DiskPartitionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <partitionLength> @linkml:Integer ? ;
+          <partitionOffset> @linkml:Integer ? ;
+          <spaceLeft> @linkml:Integer ? ;
+          <spaceUsed> @linkml:Integer ? ;
+          <totalSpace> @linkml:Integer ? ;
+          <diskPartitionType> @linkml:String ? ;
+          <mountPoint> @linkml:String ? ;
+          <partitionID> @linkml:String ?
+       ) ;
+       rdf:type [ <DiskPartitionFacet> ] ?
+    )
+}
+
+<DNSCache> CLOSED {
+    (  $<DNSCache_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <DNSCache> ] ?
+    )
+}
+
+<DNSRecord> CLOSED {
+    (  $<DNSRecord_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <DNSRecord> ] ?
+    )
+}
+
+<DomainName> CLOSED {
+    (  $<DomainName_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <DomainName> ] ?
+    )
+}
+
+<DomainNameFacet> CLOSED {
+    (  $<DomainNameFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isTLD> @core:BooleanType ? ;
+          core:value @linkml:String ?
+       ) ;
+       rdf:type [ <DomainNameFacet> ] ?
+    )
+}
+
+<Drone> CLOSED {
+    (  $<Drone_tes> (  &<MobileDevice_tes> ;
+          rdf:type [ <MobileDevice> ] ?
+       ) ;
+       rdf:type [ <Drone> ] ?
+    )
+}
+
+<EmailAccount> CLOSED {
+    (  $<EmailAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <EmailAccount> ] ?
+    )
+}
+
+<EmailAccountFacet> CLOSED {
+    (  $<EmailAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <emailAddress> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <EmailAccountFacet> ] ?
+    )
+}
+
+<EmailAddress> CLOSED {
+    (  $<EmailAddress_tes> (  &<DigitalAddress_tes> ;
+          rdf:type [ <DigitalAddress> ] ?
+       ) ;
+       rdf:type [ <EmailAddress> ] ?
+    )
+}
+
+<EmailAddressFacet> CLOSED {
+    (  $<EmailAddressFacet_tes> (  &<DigitalAddressFacet_tes> ;
+          rdf:type [ <DigitalAddressFacet> ] ?
+       ) ;
+       rdf:type [ <EmailAddressFacet> ] ?
+    )
+}
+
+<EmailMessage> CLOSED {
+    (  $<EmailMessage_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <EmailMessage> ] ?
+    )
+}
+
+<EmailMessageFacet> CLOSED {
+    (  $<EmailMessageFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <bodyMultipart> @<MimePartType> * ;
+          <application> @<ObservableObject> ? ;
+          <bodyRaw> @<ObservableObject> ? ;
+          <from> @<ObservableObject> ? ;
+          <headerRaw> @<ObservableObject> ? ;
+          <sender> @<ObservableObject> ? ;
+          <xOriginatingIP> @<ObservableObject> ? ;
+          <bcc> @<ObservableObject> * ;
+          <cc> @<ObservableObject> * ;
+          <references> @<ObservableObject> * ;
+          <to> @<ObservableObject> * ;
+          <otherHeaders> @types:Dictionary ? ;
+          <isMimeEncoded> @core:BooleanType ? ;
+          <isMultipart> @core:BooleanType ? ;
+          <isRead> @core:BooleanType ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <receivedTime> @linkml:Datetime ? ;
+          <sentTime> @linkml:Datetime ? ;
+          <body> @linkml:String ? ;
+          <contentDisposition> @linkml:String ? ;
+          <contentType> @linkml:String ? ;
+          <inReplyTo> @linkml:String ? ;
+          <messageID> @linkml:String ? ;
+          <priority> @linkml:String ? ;
+          <subject> @linkml:String ? ;
+          <xMailer> @linkml:String ? ;
+          <categories> @linkml:String * ;
+          <labels> @linkml:String * ;
+          <receivedLines> @linkml:String *
+       ) ;
+       rdf:type [ <EmailMessageFacet> ] ?
+    )
+}
+
+<EmbeddedDevice> CLOSED {
+    (  $<EmbeddedDevice_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <EmbeddedDevice> ] ?
+    )
+}
+
+core:EnclosingCompilation  (
+    CLOSED {
+       (  $core:EnclosingCompilation_tes (  &core:Compilation_tes ;
+             rdf:type [ core:Compilation ] ? ;
+             core:object @core:UcoObject *
+          ) ;
+          rdf:type [ core:EnclosingCompilation ] ?
+       )
+    } OR @core:Bundle
+)
+
+<EncodedStreamFacet> CLOSED {
+    (  $<EncodedStreamFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <encodingMethod> @linkml:String ?
+       ) ;
+       rdf:type [ <EncodedStreamFacet> ] ?
+    )
+}
+
+<EncryptedStreamFacet> CLOSED {
+    (  $<EncryptedStreamFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <encryptionMethod> @linkml:String ? ;
+          <encryptionMode> @linkml:String ? ;
+          <encryptionIV> @linkml:String * ;
+          <encryptionKey> @linkml:String *
+       ) ;
+       rdf:type [ <EncryptedStreamFacet> ] ?
+    )
+}
+
+<EnvironmentVariable> CLOSED {
+    (  $<EnvironmentVariable_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          rdfs:label @linkml:String ? ;
+          core:value @linkml:String ?
+       ) ;
+       rdf:type [ <EnvironmentVariable> ] ?
+    )
+}
+
+<EventLog> CLOSED {
+    (  $<EventLog_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <EventLog> ] ?
+    )
+}
+
+<EventRecord> CLOSED {
+    (  $<EventRecord_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <EventRecord> ] ?
+    )
+}
+
+<EventRecordFacet> CLOSED {
+    (  $<EventRecordFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <cyberAction> @<ObservableAction> ? ;
+          <account> @<ObservableObject> ? ;
+          <application> @<ObservableObject> ? ;
+          <eventRecordDevice> @<ObservableObject> ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          core:endTime @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ? ;
+          <eventID> @linkml:String ? ;
+          <eventRecordID> @linkml:String ? ;
+          <eventRecordRaw> @linkml:String ? ;
+          <eventRecordServiceName> @linkml:String ? ;
+          <eventRecordText> @linkml:String ? ;
+          <eventType> @linkml:String ?
+       ) ;
+       rdf:type [ <EventRecordFacet> ] ?
+    )
+}
+
+identity:EventsFacet CLOSED {
+    (  $identity:EventsFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:EventsFacet ] ?
+    )
+}
+
+<EXIFFacet> CLOSED {
+    (  $<EXIFFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <exifData> @types:ControlledDictionary *
+       ) ;
+       rdf:type [ <EXIFFacet> ] ?
+    )
+}
+
+core:ExternalReference CLOSED {
+    (  $core:ExternalReference_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          core:referenceURL @core:IriType ? ;
+          core:definingContext @linkml:String ? ;
+          core:externalIdentifier @linkml:String ?
+       ) ;
+       rdf:type [ core:ExternalReference ] ?
+    )
+}
+
+<ExtInodeFacet> CLOSED {
+    (  $<ExtInodeFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <extDeletionTime> @linkml:Datetime ? ;
+          <extInodeChangeTime> @linkml:Datetime ? ;
+          <extFileType> @linkml:Integer ? ;
+          <extFlags> @linkml:Integer ? ;
+          <extHardLinkCount> @linkml:Integer ? ;
+          <extInodeID> @linkml:Integer ? ;
+          <extPermissions> @linkml:Integer ? ;
+          <extSGID> @linkml:Integer ? ;
+          <extSUID> @linkml:Integer ?
+       ) ;
+       rdf:type [ <ExtInodeFacet> ] ?
+    )
+}
+
+<ExtractedString> CLOSED {
+    (  $<ExtractedString_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <length> @linkml:Integer ? ;
+          <byteStringValue> @<Base64BinaryType> ? ;
+          <encoding> @linkml:String ? ;
+          <englishTranslation> @linkml:String ? ;
+          <language> @linkml:String ? ;
+          <stringValue> @linkml:String ?
+       ) ;
+       rdf:type [ <ExtractedString> ] ?
+    )
+}
+
+<ExtractedStringsFacet> CLOSED {
+    (  $<ExtractedStringsFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <strings> @<ExtractedString> *
+       ) ;
+       rdf:type [ <ExtractedStringsFacet> ] ?
+    )
+}
+
+core:Facet  (
+    @<AccountAuthenticationFacet> OR @<AccountFacet> OR @action:ActionArgumentFacet OR @action:ActionEstimationFacet OR
+    @action:ActionFrequencyFacet OR @<AlternateDataStreamFacet> OR @<AndroidDeviceFacet> OR @<AntennaFacet> OR
+    @<ApplicationAccountFacet> OR @<ApplicationFacet> OR @<ArchiveFileFacet> OR @<AudioFacet> OR @<AutonomousSystemFacet> OR
+    @<BrowserBookmarkFacet> OR @<BrowserCookieFacet> OR @<CalendarEntryFacet> OR @<CalendarFacet> OR @<CallFacet> OR
+    @<CapturedTelecommunicationsInformationFacet> OR @<CellSiteFacet> OR @<CompressedStreamFacet> OR @<ComputerSpecificationFacet>
+    OR @core:ConfidenceFacet OR @<ContactFacet> OR @<ContactListFacet> OR @<ContentDataFacet> OR @<DataRangeFacet> OR
+    @<DefinedEffectFacet> OR @<DeviceFacet> OR @<DigitalAccountFacet> OR @<DigitalAddressFacet> OR @<DigitalSignatureInfoFacet> OR
+    @<DiskFacet> OR @<DiskPartitionFacet> OR @<DomainNameFacet> OR @<EXIFFacet> OR @<EmailAccountFacet> OR @<EmailMessageFacet> OR
+    @<EncodedStreamFacet> OR @<EncryptedStreamFacet> OR @<EventRecordFacet> OR @<ExtInodeFacet> OR @<ExtractedStringsFacet> OR
+    @<FileFacet> OR @<FilePermissionsFacet> OR @<FileSystemFacet> OR @<FragmentFacet> OR @location:GPSCoordinatesFacet OR
+    @<GeoLocationEntryFacet> OR @<GeoLocationLogFacet> OR @<GeoLocationTrackFacet> OR @<HTTPConnectionFacet> OR
+    @<ICMPConnectionFacet> OR @identity:IdentityFacet OR @<ImageFacet> OR @location:LatLongCoordinatesFacet OR @<LibraryFacet> OR
+    @<MemoryFacet> OR @<MessageFacet> OR @<MessageThreadFacet> OR @<MftRecordFacet> OR @<MobileAccountFacet> OR
+    @<MobileDeviceFacet> OR @<MutexFacet> OR @<NTFSFileFacet> OR @<NTFSFilePermissionsFacet> OR @<NetworkConnectionFacet> OR
+    @<NetworkFlowFacet> OR @<NetworkInterfaceFacet> OR @<NoteFacet> OR @<OnlineServiceFacet> OR @<OperatingSystemFacet> OR
+    @<PDFFileFacet> OR @<PathRelationFacet> OR @<PhoneAccountFacet> OR @<ProcessFacet> OR @<ProfileFacet> OR @<RasterPictureFacet>
+    OR @<RecoveredObjectFacet> OR @<SIMCardFacet> OR @<SMSMessageFacet> OR @<SQLiteBlobFacet> OR @location:SimpleAddressFacet OR
+    @<SoftwareFacet> OR @<SymbolicLinkFacet> OR @<TCPConnectionFacet> OR @<TableFieldFacet> OR @<TwitterProfileFacet> OR
+    @<UNIXAccountFacet> OR @<UNIXFilePermissionsFacet> OR @<UNIXProcessFacet> OR @<UNIXVolumeFacet> OR @<URLFacet> OR
+    @<URLHistoryFacet> OR @<URLVisitFacet> OR @<UserAccountFacet> OR @<UserSessionFacet> OR @<VolumeFacet> OR @<WhoisFacet> OR
+    @<WindowsAccountFacet> OR @<WindowsActiveDirectoryAccountFacet> OR @<WindowsComputerSpecificationFacet> OR
+    @<WindowsPEBinaryFileFacet> OR @<WindowsPrefetchFacet> OR @<WindowsProcessFacet> OR @<WindowsRegistryHiveFacet> OR
+    @<WindowsRegistrykeyFacet> OR @<WindowsServiceFacet> OR @<WindowsTaskFacet> OR @<WindowsThreadFacet> OR @<WindowsVolumeFacet>
+    OR @<WirelessNetworkConnectionFacet> OR @<X509CertificateFacet> OR @<X509V3ExtensionsFacet>
+)
+
+core:Facet_struct {
+    (  $core:Facet_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ?
+       ) ;
+       rdf:type [ core:Facet ] ?
+    )
+}
+
+<File>  (
+    CLOSED {
+       (  $<File_tes> (  &<FileSystemObject_tes> ;
+             rdf:type [ <FileSystemObject> ] ?
+          ) ;
+          rdf:type [ <File> ] ?
+       )
+    } OR @<ArchiveFile> OR @<NTFSFile> OR @<PDFFile> OR @<RasterPicture> OR @<UNIXFile> OR @<WindowsPEBinaryFile>
+)
+
+<FileFacet> CLOSED {
+    (  $<FileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isDirectory> @core:BooleanType * ;
+          <accessedTime> @linkml:Datetime ? ;
+          <metadataChangeTime> @linkml:Datetime ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <sizeInBytes> @linkml:Integer ? ;
+          <allocationStatus> @linkml:String ? ;
+          <extension> @linkml:String ? ;
+          <fileName> @linkml:String * ;
+          <filePath> @linkml:String *
+       ) ;
+       rdf:type [ <FileFacet> ] ?
+    )
+}
+
+<FilePermissionsFacet> CLOSED {
+    (  $<FilePermissionsFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <owner> @core:UcoObject ?
+       ) ;
+       rdf:type [ <FilePermissionsFacet> ] ?
+    )
+}
+
+<FileSystem> CLOSED {
+    (  $<FileSystem_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <FileSystem> ] ?
+    )
+}
+
+<FileSystemFacet> CLOSED {
+    (  $<FileSystemFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <clusterSize> @linkml:Integer ? ;
+          <fileSystemType> @linkml:String ?
+       ) ;
+       rdf:type [ <FileSystemFacet> ] ?
+    )
+}
+
+<FileSystemObject>  (
+    CLOSED {
+       (  $<FileSystemObject_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <FileSystemObject> ] ?
+       )
+    } OR @<BlockDeviceNode> OR @<CharacterDeviceNode> OR @<Directory> OR @<File> OR @<Junction> OR @<NamedPipe> OR @<ReparsePoint>
+    OR @<Snapshot> OR @<Socket> OR @<SymbolicLink>
+)
+
+<ForumPost> CLOSED {
+    (  $<ForumPost_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <ForumPost> ] ?
+    )
+}
+
+<ForumPrivateMessage> CLOSED {
+    (  $<ForumPrivateMessage_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <ForumPrivateMessage> ] ?
+    )
+}
+
+<FragmentFacet> CLOSED {
+    (  $<FragmentFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <fragmentIndex> @linkml:Integer * ;
+          <totalFragments> @linkml:Integer *
+       ) ;
+       rdf:type [ <FragmentFacet> ] ?
+    )
+}
+
+<GamingConsole> CLOSED {
+    (  $<GamingConsole_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <GamingConsole> ] ?
+    )
+}
+
+<GenericObservableObject> CLOSED {
+    (  $<GenericObservableObject_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <GenericObservableObject> ] ?
+    )
+}
+
+<GeoLocationEntry> CLOSED {
+    (  $<GeoLocationEntry_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <GeoLocationEntry> ] ?
+    )
+}
+
+<GeoLocationEntryFacet> CLOSED {
+    (  $<GeoLocationEntryFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          action:location @location:Location ? ;
+          <application> @<ObservableObject> ? ;
+          <observableCreatedTime> @linkml:Datetime ?
+       ) ;
+       rdf:type [ <GeoLocationEntryFacet> ] ?
+    )
+}
+
+<GeoLocationLog> CLOSED {
+    (  $<GeoLocationLog_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <GeoLocationLog> ] ?
+    )
+}
+
+<GeoLocationLogFacet> CLOSED {
+    (  $<GeoLocationLogFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          <observableCreatedTime> @linkml:Datetime ?
+       ) ;
+       rdf:type [ <GeoLocationLogFacet> ] ?
+    )
+}
+
+<GeoLocationTrack> CLOSED {
+    (  $<GeoLocationTrack_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <GeoLocationTrack> ] ?
+    )
+}
+
+<GeoLocationTrackFacet> CLOSED {
+    (  $<GeoLocationTrackFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          <geoLocationEntry> @<ObservableObject> * ;
+          core:endTime @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ?
+       ) ;
+       rdf:type [ <GeoLocationTrackFacet> ] ?
+    )
+}
+
+<GlobalFlagType> CLOSED {
+    (  $<GlobalFlagType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <hexadecimalValue> @core:HexBinaryType * ;
+          <abbreviation> @linkml:String ? ;
+          <destination> @linkml:String ? ;
+          <symbolicName> @linkml:String ?
+       ) ;
+       rdf:type [ <GlobalFlagType> ] ?
+    )
+}
+
+location:GPSCoordinatesFacet CLOSED {
+    (  $location:GPSCoordinatesFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          location:hdop @location:DecimalType ? ;
+          location:pdop @location:DecimalType ? ;
+          location:tdop @location:DecimalType ? ;
+          location:vdop @location:DecimalType ?
+       ) ;
+       rdf:type [ location:GPSCoordinatesFacet ] ?
+    )
+}
+
+core:Grouping CLOSED {
+    (  $core:Grouping_tes (  &core:ContextualCompilation_tes ;
+          rdf:type [ core:ContextualCompilation ] ? ;
+          core:context @linkml:String *
+       ) ;
+       rdf:type [ core:Grouping ] ?
+    )
+}
+
+<GUI> CLOSED {
+    (  $<GUI_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <GUI> ] ?
+    )
+}
+
+types:Hash CLOSED {
+    (  $types:Hash_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          types:hashValue @core:HexBinaryType ;
+          types:hashMethod @linkml:String
+       ) ;
+       rdf:type [ types:Hash ] ?
+    )
+}
+
+<Hostname> CLOSED {
+    (  $<Hostname_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Hostname> ] ?
+    )
+}
+
+<HTTPConnection> CLOSED {
+    (  $<HTTPConnection_tes> (  &<NetworkConnection_tes> ;
+          rdf:type [ <NetworkConnection> ] ?
+       ) ;
+       rdf:type [ <HTTPConnection> ] ?
+    )
+}
+
+<HTTPConnectionFacet> CLOSED {
+    (  $<HTTPConnectionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <httpMessageBodyData> @<ObservableObject> ? ;
+          <httpMessageBodyLength> @linkml:Integer ? ;
+          <httpRequestHeader> @types:Dictionary ? ;
+          <requestMethod> @linkml:String ? ;
+          <requestValue> @linkml:String ? ;
+          <requestVersion> @linkml:String ?
+       ) ;
+       rdf:type [ <HTTPConnectionFacet> ] ?
+    )
+}
+
+<ICMPConnection> CLOSED {
+    (  $<ICMPConnection_tes> (  &<NetworkConnection_tes> ;
+          rdf:type [ <NetworkConnection> ] ?
+       ) ;
+       rdf:type [ <ICMPConnection> ] ?
+    )
+}
+
+<ICMPConnectionFacet> CLOSED {
+    (  $<ICMPConnectionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <icmpCode> @core:HexBinaryType * ;
+          <icmpType> @core:HexBinaryType *
+       ) ;
+       rdf:type [ <ICMPConnectionFacet> ] ?
+    )
+}
+
+<IComHandlerActionType> CLOSED {
+    (  $<IComHandlerActionType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <comClassID> @linkml:String ? ;
+          <comData> @linkml:String ?
+       ) ;
+       rdf:type [ <IComHandlerActionType> ] ?
+    )
+}
+
+identity:IdentifierFacet CLOSED {
+    (  $identity:IdentifierFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:IdentifierFacet ] ?
+    )
+}
+
+identity:Identity  (
+    CLOSED {
+       (  $identity:Identity_tes (  &core:IdentityAbstraction_tes ;
+             rdf:type [ core:IdentityAbstraction ] ?
+          ) ;
+          rdf:type [ identity:Identity ] ?
+       )
+    } OR @identity:Organization OR @identity:Person
+)
+
+core:IdentityAbstraction  (
+    CLOSED {
+       (  $core:IdentityAbstraction_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ?
+          ) ;
+          rdf:type [ core:IdentityAbstraction ] ?
+       )
+    } OR @identity:Identity
+)
+
+identity:IdentityFacet  (
+    CLOSED {
+       (  $identity:IdentityFacet_tes (  &core:Facet_tes ;
+             rdf:type [ core:Facet ] ?
+          ) ;
+          rdf:type [ identity:IdentityFacet ] ?
+       )
+    } OR @identity:AddressFacet OR @identity:AffiliationFacet OR @identity:BirthInformationFacet OR
+    @identity:CountryOfResidenceFacet OR @identity:EventsFacet OR @identity:IdentifierFacet OR @identity:LanguagesFacet OR
+    @identity:NationalityFacet OR @identity:OccupationFacet OR @identity:OrganizationDetailsFacet OR @identity:PersonalDetailsFacet
+    OR @identity:PhysicalInfoFacet OR @identity:QualificationFacet OR @identity:RelatedIdentityFacet OR @identity:SimpleNameFacet
+    OR @identity:VisaFacet
+)
+
+<IExecActionType> CLOSED {
+    (  $<IExecActionType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <execProgramHashes> @types:Hash * ;
+          <execArguments> @linkml:String ? ;
+          <execProgramPath> @linkml:String ? ;
+          <execWorkingDirectory> @linkml:String ?
+       ) ;
+       rdf:type [ <IExecActionType> ] ?
+    )
+}
+
+<Image> CLOSED {
+    (  $<Image_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Image> ] ?
+    )
+}
+
+<ImageFacet> CLOSED {
+    (  $<ImageFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <imageType> @linkml:String ?
+       ) ;
+       rdf:type [ <ImageFacet> ] ?
+    )
+}
+
+<InstantMessagingAddress> CLOSED {
+    (  $<InstantMessagingAddress_tes> (  &<DigitalAddress_tes> ;
+          rdf:type [ <DigitalAddress> ] ?
+       ) ;
+       rdf:type [ <InstantMessagingAddress> ] ?
+    )
+}
+
+<InstantMessagingAddressFacet> CLOSED {
+    (  $<InstantMessagingAddressFacet_tes> (  &<DigitalAddressFacet_tes> ;
+          rdf:type [ <DigitalAddressFacet> ] ?
+       ) ;
+       rdf:type [ <InstantMessagingAddressFacet> ] ?
+    )
+}
+
+<IPAddress>  (
+    CLOSED {
+       (  $<IPAddress_tes> (  &<DigitalAddress_tes> ;
+             rdf:type [ <DigitalAddress> ] ?
+          ) ;
+          rdf:type [ <IPAddress> ] ?
+       )
+    } OR @<IPv4Address> OR @<IPv6Address>
+)
+
+<IPAddressFacet>  (
+    CLOSED {
+       (  $<IPAddressFacet_tes> (  &<DigitalAddressFacet_tes> ;
+             rdf:type [ <DigitalAddressFacet> ] ?
+          ) ;
+          rdf:type [ <IPAddressFacet> ] ?
+       )
+    } OR @<IPv4AddressFacet> OR @<IPv6AddressFacet>
+)
+
+<IPhone> CLOSED {
+    (  $<IPhone_tes> (  &<AppleDevice_tes> ;
+          rdf:type [ <AppleDevice> ] ? ;
+          &<SmartPhone_tes> ;
+          rdf:type [ <SmartPhone> ] ?
+       ) ;
+       rdf:type [ <IPhone> ] ?
+    )
+}
+
+<IPNetmask> CLOSED {
+    (  $<IPNetmask_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <IPNetmask> ] ?
+    )
+}
+
+<IPv4Address> CLOSED {
+    (  $<IPv4Address_tes> (  &<IPAddress_tes> ;
+          rdf:type [ <IPAddress> ] ?
+       ) ;
+       rdf:type [ <IPv4Address> ] ?
+    )
+}
+
+<IPv4AddressFacet> CLOSED {
+    (  $<IPv4AddressFacet_tes> (  &<IPAddressFacet_tes> ;
+          rdf:type [ <IPAddressFacet> ] ?
+       ) ;
+       rdf:type [ <IPv4AddressFacet> ] ?
+    )
+}
+
+<IPv6Address> CLOSED {
+    (  $<IPv6Address_tes> (  &<IPAddress_tes> ;
+          rdf:type [ <IPAddress> ] ?
+       ) ;
+       rdf:type [ <IPv6Address> ] ?
+    )
+}
+
+<IPv6AddressFacet> CLOSED {
+    (  $<IPv6AddressFacet_tes> (  &<IPAddressFacet_tes> ;
+          rdf:type [ <IPAddressFacet> ] ?
+       ) ;
+       rdf:type [ <IPv6AddressFacet> ] ?
+    )
+}
+
+<IShowMessageActionType> CLOSED {
+    (  $<IShowMessageActionType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <showMessageBody> @linkml:String ? ;
+          <showMessageTitle> @linkml:String ?
+       ) ;
+       rdf:type [ <IShowMessageActionType> ] ?
+    )
+}
+
+core:Item CLOSED {
+    (  $core:Item_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ?
+       ) ;
+       rdf:type [ core:Item ] ?
+    )
+}
+
+<Junction> CLOSED {
+    (  $<Junction_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <Junction> ] ?
+    )
+}
+
+identity:LanguagesFacet CLOSED {
+    (  $identity:LanguagesFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:LanguagesFacet ] ?
+    )
+}
+
+<Laptop> CLOSED {
+    (  $<Laptop_tes> (  &<Computer_tes> ;
+          rdf:type [ <Computer> ] ?
+       ) ;
+       rdf:type [ <Laptop> ] ?
+    )
+}
+
+location:LatLongCoordinatesFacet CLOSED {
+    (  $location:LatLongCoordinatesFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          location:altitude @location:DecimalType ? ;
+          location:latitude @location:DecimalType ? ;
+          location:longitude @location:DecimalType ?
+       ) ;
+       rdf:type [ location:LatLongCoordinatesFacet ] ?
+    )
+}
+
+<Library> CLOSED {
+    (  $<Library_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Library> ] ?
+    )
+}
+
+<LibraryFacet> CLOSED {
+    (  $<LibraryFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <libraryType> @linkml:String ?
+       ) ;
+       rdf:type [ <LibraryFacet> ] ?
+    )
+}
+
+collections:List CLOSED {
+    (  $collections:List_tes (  &collections:Bag_tes ;
+          rdf:type [ collections:Bag ] ? ;
+          collections:lastItem @collections:ListItem ? ;
+          collections:firstItem @collections:ListItem ?
+       ) ;
+       rdf:type [ collections:List ] ?
+    )
+}
+
+collections:ListItem CLOSED {
+    (  $collections:ListItem_tes (  &collections:CoItem_tes ;
+          rdf:type [ collections:CoItem ] ? ;
+          collections:_index @collections:PositiveInteger
+       ) ;
+       rdf:type [ collections:ListItem ] ?
+    )
+}
+
+location:Location CLOSED {
+    (  $location:Location_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ?
+       ) ;
+       rdf:type [ location:Location ] ?
+    )
+}
+
+pattern:LogicalPattern CLOSED {
+    (  $pattern:LogicalPattern_tes (  &pattern:Pattern_tes ;
+          rdf:type [ pattern:Pattern ] ? ;
+          pattern:patternExpression @linkml:String ?
+       ) ;
+       rdf:type [ pattern:LogicalPattern ] ?
+    )
+}
+
+<MACAddress>  (
+    CLOSED {
+       (  $<MACAddress_tes> (  &<DigitalAddress_tes> ;
+             rdf:type [ <DigitalAddress> ] ?
+          ) ;
+          rdf:type [ <MACAddress> ] ?
+       )
+    } OR @<BluetoothAddress> OR @<WifiAddress>
+)
+
+<MACAddressFacet>  (
+    CLOSED {
+       (  $<MACAddressFacet_tes> (  &<DigitalAddressFacet_tes> ;
+             rdf:type [ <DigitalAddressFacet> ] ?
+          ) ;
+          rdf:type [ <MACAddressFacet> ] ?
+       )
+    } OR @<BluetoothAddressFacet> OR @<WifiAddressFacet>
+)
+
+core:MarkingDefinitionAbstraction CLOSED {
+    (  $core:MarkingDefinitionAbstraction_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ?
+       ) ;
+       rdf:type [ core:MarkingDefinitionAbstraction ] ?
+    )
+}
+
+<Memory> CLOSED {
+    (  $<Memory_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Memory> ] ?
+    )
+}
+
+<MemoryFacet> CLOSED {
+    (  $<MemoryFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isInjected> @core:BooleanType ? ;
+          <isMapped> @core:BooleanType ? ;
+          <isProtected> @core:BooleanType ? ;
+          <isVolatile> @core:BooleanType ? ;
+          <regionEndAddress> @core:HexBinaryType * ;
+          <regionStartAddress> @core:HexBinaryType * ;
+          <regionSize> @linkml:Integer ? ;
+          <blockType> @vocabulary:MemoryBlockTypeEnum ?
+       ) ;
+       rdf:type [ <MemoryFacet> ] ?
+    )
+}
+
+<Message>  (
+    CLOSED {
+       (  $<Message_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Message> ] ?
+       )
+    } OR @<EmailMessage> OR @<ForumPost> OR @<ForumPrivateMessage> OR @<Post> OR @<SMSMessage> OR @<Tweet>
+)
+
+<MessageFacet> CLOSED {
+    (  $<MessageFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          <from> @<ObservableObject> * ;
+          <to> @<ObservableObject> * ;
+          <sentTime> @linkml:Datetime ? ;
+          <messageID> @linkml:String ? ;
+          <messageText> @linkml:String ? ;
+          <messageType> @linkml:String ? ;
+          <sessionID> @linkml:String ?
+       ) ;
+       rdf:type [ <MessageFacet> ] ?
+    )
+}
+
+<MessageThreadFacet> CLOSED {
+    (  $<MessageThreadFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <messageThreadOrderedItems> @types:Thread ? ;
+          <messageThreadOriginItems> @types:Thread ? ;
+          <messageThreadTerminalItems> @types:Thread ? ;
+          <messageThreadUnorderedItems> @types:Thread ? ;
+          action:participant @<ObservableObject> * ;
+          <visibility> @core:BooleanType ?
+       ) ;
+       rdf:type [ <MessageThreadFacet> ] ?
+    )
+}
+
+<MftRecordFacet> CLOSED {
+    (  $<MftRecordFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <mftFileNameAccessedTime> @linkml:Datetime ? ;
+          <mftFileNameCreatedTime> @linkml:Datetime ? ;
+          <mftFileNameModifiedTime> @linkml:Datetime ? ;
+          <mftFileNameRecordChangeTme> @linkml:Datetime ? ;
+          <mftRecordChangeTime> @linkml:Datetime ? ;
+          <mftFileID> @linkml:Integer ? ;
+          <mftFileNameLength> @linkml:Integer ? ;
+          <mftFlags> @linkml:Integer ? ;
+          <mftParentID> @linkml:Integer ? ;
+          <ntfsHardLinkCount> @linkml:Integer ? ;
+          <ntfsOwnerID> @linkml:String ? ;
+          <ntfsOwnerSID> @linkml:String ?
+       ) ;
+       rdf:type [ <MftRecordFacet> ] ?
+    )
+}
+
+<MimePartType> CLOSED {
+    (  $<MimePartType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <bodyRaw> @<ObservableObject> ? ;
+          <body> @linkml:String ? ;
+          <contentDisposition> @linkml:String ? ;
+          <contentType> @linkml:String ?
+       ) ;
+       rdf:type [ <MimePartType> ] ?
+    )
+}
+
+<MobileAccount> CLOSED {
+    (  $<MobileAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <MobileAccount> ] ?
+    )
+}
+
+<MobileAccountFacet> CLOSED {
+    (  $<MobileAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <IMSI> @linkml:String ? ;
+          <MSISDN> @linkml:String ? ;
+          <MSISDNType> @linkml:String ?
+       ) ;
+       rdf:type [ <MobileAccountFacet> ] ?
+    )
+}
+
+<MobileDevice>  (
+    CLOSED {
+       (  $<MobileDevice_tes> (  &<Device_tes> ;
+             rdf:type [ <Device> ] ?
+          ) ;
+          rdf:type [ <MobileDevice> ] ?
+       )
+    } OR @<Drone> OR @<MobilePhone>
+)
+
+<MobileDeviceFacet> CLOSED {
+    (  $<MobileDeviceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <mockLocationsAllowed> @core:BooleanType ? ;
+          <clockSetting> @linkml:Datetime ? ;
+          <phoneActivationTime> @linkml:Datetime ? ;
+          <storageCapacityInBytes> @linkml:Integer ? ;
+          <ESN> @linkml:String ? ;
+          <IMEI> @linkml:String ? ;
+          <bluetoothDeviceName> @linkml:String ? ;
+          <keypadUnlockCode> @linkml:String ? ;
+          <network> @linkml:String ?
+       ) ;
+       rdf:type [ <MobileDeviceFacet> ] ?
+    )
+}
+
+<MobilePhone> {
+    (  $<MobilePhone_tes> (  &<MobileDevice_tes> ;
+          rdf:type [ <MobileDevice> ] ?
+       ) ;
+       rdf:type [ <MobilePhone> ] ?
+    )
+}
+
+core:ModusOperandi CLOSED {
+    (  $core:ModusOperandi_tes (  &core:UcoObject_tes ;
+          rdf:type [ core:UcoObject ] ?
+       ) ;
+       rdf:type [ core:ModusOperandi ] ?
+    )
+}
+
+<Mutex> CLOSED {
+    (  $<Mutex_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Mutex> ] ?
+    )
+}
+
+<MutexFacet> CLOSED {
+    (  $<MutexFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isNamed> @core:BooleanType ? ;
+          <mutexName> @linkml:String ?
+       ) ;
+       rdf:type [ <MutexFacet> ] ?
+    )
+}
+
+<NamedPipe> CLOSED {
+    (  $<NamedPipe_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <NamedPipe> ] ?
+    )
+}
+
+identity:NationalityFacet CLOSED {
+    (  $identity:NationalityFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:NationalityFacet ] ?
+    )
+}
+
+<NetworkAppliance> CLOSED {
+    (  $<NetworkAppliance_tes> (  &<Appliance_tes> ;
+          rdf:type [ <Appliance> ] ?
+       ) ;
+       rdf:type [ <NetworkAppliance> ] ?
+    )
+}
+
+<NetworkConnection>  (
+    CLOSED {
+       (  $<NetworkConnection_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <NetworkConnection> ] ?
+       )
+    } OR @<HTTPConnection> OR @<ICMPConnection> OR @<TCPConnection> OR @<WirelessNetworkConnection>
+)
+
+<NetworkConnectionFacet> CLOSED {
+    (  $<NetworkConnectionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <src> @core:UcoObject * ;
+          <dst> @<ObservableObject> * ;
+          <protocols> @types:ControlledDictionary ? ;
+          <isActive> @core:BooleanType ? ;
+          core:endTime @linkml:Datetime ? ;
+          core:startTime @linkml:Datetime ? ;
+          <destinationPort> @linkml:Integer ? ;
+          <sourcePort> @linkml:Integer ?
+       ) ;
+       rdf:type [ <NetworkConnectionFacet> ] ?
+    )
+}
+
+<NetworkFlow> CLOSED {
+    (  $<NetworkFlow_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <NetworkFlow> ] ?
+    )
+}
+
+<NetworkFlowFacet> CLOSED {
+    (  $<NetworkFlowFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <dstPayload> @<ObservableObject> ? ;
+          <srcPayload> @<ObservableObject> ? ;
+          <ipfix> @types:Dictionary ? ;
+          <dstBytes> @linkml:Integer ? ;
+          <dstPackets> @linkml:Integer ? ;
+          <srcBytes> @linkml:Integer ? ;
+          <srcPackets> @linkml:Integer ?
+       ) ;
+       rdf:type [ <NetworkFlowFacet> ] ?
+    )
+}
+
+<NetworkInterface> CLOSED {
+    (  $<NetworkInterface_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <NetworkInterface> ] ?
+    )
+}
+
+<NetworkInterfaceFacet> CLOSED {
+    (  $<NetworkInterfaceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <macAddress> @<ObservableObject> ? ;
+          <dhcpServer> @<ObservableObject> * ;
+          <ip> @<ObservableObject> * ;
+          <ipGateway> @<ObservableObject> * ;
+          <dhcpLeaseExpires> @linkml:Datetime ? ;
+          <dhcpLeaseObtained> @linkml:Datetime ? ;
+          <adapterName> @linkml:String ?
+       ) ;
+       rdf:type [ <NetworkInterfaceFacet> ] ?
+    )
+}
+
+<NetworkProtocol> CLOSED {
+    (  $<NetworkProtocol_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <NetworkProtocol> ] ?
+    )
+}
+
+<NetworkRoute> CLOSED {
+    (  $<NetworkRoute_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <NetworkRoute> ] ?
+    )
+}
+
+<NetworkSocketAddressFamily> CLOSED {
+    (  $<NetworkSocketAddressFamily_tes> rdf:type . * ;
+       rdf:type [ <NetworkSocketAddressFamily> ] ?
+    )
+}
+
+<NetworkSocketProtocolFamily> CLOSED {
+    (  $<NetworkSocketProtocolFamily_tes> rdf:type . * ;
+       rdf:type [ <NetworkSocketProtocolFamily> ] ?
+    )
+}
+
+<NetworkSocketType> CLOSED {
+    (  $<NetworkSocketType_tes> rdf:type . * ;
+       rdf:type [ <NetworkSocketType> ] ?
+    )
+}
+
+<NetworkSubnet> CLOSED {
+    (  $<NetworkSubnet_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <NetworkSubnet> ] ?
+    )
+}
+
+<Note> CLOSED {
+    (  $<Note_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Note> ] ?
+    )
+}
+
+<NoteFacet> CLOSED {
+    (  $<NoteFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <application> @<ObservableObject> ? ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <text> @linkml:String ?
+       ) ;
+       rdf:type [ <NoteFacet> ] ?
+    )
+}
+
+<NTFSFile> CLOSED {
+    (  $<NTFSFile_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <NTFSFile> ] ?
+    )
+}
+
+<NTFSFileFacet> CLOSED {
+    (  $<NTFSFileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <alternateDataStreams> @<AlternateDataStream> * ;
+          <entryID> @linkml:Integer ? ;
+          <sid> @linkml:String ?
+       ) ;
+       rdf:type [ <NTFSFileFacet> ] ?
+    )
+}
+
+<NTFSFilePermissionsFacet> CLOSED {
+    (  $<NTFSFilePermissionsFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ?
+       ) ;
+       rdf:type [ <NTFSFilePermissionsFacet> ] ?
+    )
+}
+
+<Observable>  (
+    {
+       (  $<Observable_tes> (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ?
+          ) ;
+          rdf:type [ <Observable> ] ?
+       )
+    } OR @<ObservablePattern>
+)
+
+<ObservableAction> CLOSED {
+    (  $<ObservableAction_tes> (  &action:Action_tes ;
+          rdf:type [ action:Action ] ? ;
+          &<Observable_tes> ;
+          rdf:type [ <Observable> ] ?
+       ) ;
+       rdf:type [ <ObservableAction> ] ?
+    )
+}
+
+<ObservableObject>  (
+    CLOSED {
+       (  $<ObservableObject_tes> (  &collections:CoItem_tes ;
+             rdf:type [ collections:CoItem ] ? ;
+             &<Observable_tes> ;
+             rdf:type [ <Observable> ] ? ;
+             <hasChanged> @core:BooleanType ? ;
+             <state> @linkml:String ? ;
+             core:createdBy @linkml:String ? ;
+             dcterms:description @linkml:String * ;
+             core:externalReference @linkml:String * ;
+             core:hasFacet @linkml:String * ;
+             core:modifiedTime @linkml:Datetime * ;
+             rdfs:label @linkml:String ? ;
+             core:objectMarking @core:MarkingDefinitionAbstraction * ;
+             core:objectCreatedTime @linkml:Datetime ? ;
+             core:specVersion @linkml:String ? ;
+             core:tag @linkml:String *
+          ) ;
+          rdf:type [ <ObservableObject> ] ?
+       )
+    } OR @<API> OR @<ARPCache> OR @<ARPCacheEntry> OR @<Account> OR @<Address> OR @<AlternateDataStream> OR @<Application> OR
+    @<Audio> OR @<AutonomousSystem> OR @<BotConfiguration> OR @<BrowserBookmark> OR @<BrowserCookie> OR @<Calendar> OR
+    @<CalendarEntry> OR @<Call> OR @<CapturedTelecommunicationsInformation> OR @<CellSite> OR @<Code> OR @<ComputerSpecification>
+    OR @<Contact> OR @<ContactList> OR @<ContentData> OR @<CookieHistory> OR @<Credential> OR @<CredentialDump> OR @<DNSCache> OR
+    @<DNSRecord> OR @<Device> OR @<DigitalSignatureInfo> OR @<Disk> OR @<DiskPartition> OR @<DomainName> OR @<EventLog> OR
+    @<EventRecord> OR @<FileSystem> OR @<FileSystemObject> OR @<GUI> OR @<GenericObservableObject> OR @<GeoLocationEntry> OR
+    @<GeoLocationLog> OR @<GeoLocationTrack> OR @<Hostname> OR @<IPNetmask> OR @<Image> OR @<Library> OR @<Memory> OR @<Message> OR
+    @<Mutex> OR @<NetworkConnection> OR @<NetworkFlow> OR @<NetworkInterface> OR @<NetworkProtocol> OR @<NetworkRoute> OR
+    @<NetworkSubnet> OR @<Note> OR @<OnlineService> OR @<OperatingSystem> OR @<PaymentCard> OR @<Pipe> OR @<Process> OR
+    @<ProcessThread> OR @<Profile> OR @<RecoveredObject> OR @<SQLiteBlob> OR @<Semaphore> OR @<ShopListing> OR @<Software> OR
+    @<TableField> OR @<URL> OR @<URLHistory> OR @<URLVisit> OR @<UserSession> OR @<Volume> OR @<WebPage> OR @<Whois> OR @<Wiki> OR
+    @<WikiArticle> OR @<WindowsComputerSpecification> OR @<WindowsCriticalSection> OR @<WindowsEvent> OR @<WindowsFileMapping> OR
+    @<WindowsHandle> OR @<WindowsHook> OR @<WindowsMailSlot> OR @<WindowsNetworkShare> OR @<WindowsPrefetch> OR
+    @<WindowsRegistryHive> OR @<WindowsRegistryKey> OR @<WindowsService> OR @<WindowsSystemRestore> OR @<WindowsTask> OR
+    @<WindowsWaitableTime> OR @<X509Certificate> OR @<X509V3Certificate>
+)
+
+<ObservablePattern> CLOSED {
+    (  $<ObservablePattern_tes> (  &<Observable_tes> ;
+          rdf:type [ <Observable> ] ?
+       ) ;
+       rdf:type [ <ObservablePattern> ] ?
+    )
+}
+
+<ObservableRelationship> CLOSED {
+    (  $<ObservableRelationship_tes> (  &core:Relationship_tes ;
+          rdf:type [ core:Relationship ] ? ;
+          &<Observable_tes> ;
+          rdf:type [ <Observable> ] ?
+       ) ;
+       rdf:type [ <ObservableRelationship> ] ?
+    )
+}
+
+<Observation> CLOSED {
+    (  $<Observation_tes> (  &action:Action_tes ;
+          rdf:type [ action:Action ] ? ;
+          rdfs:label @linkml:String
+       ) ;
+       rdf:type [ <Observation> ] ?
+    )
+}
+
+identity:OccupationFacet CLOSED {
+    (  $identity:OccupationFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:OccupationFacet ] ?
+    )
+}
+
+<OnlineService> CLOSED {
+    (  $<OnlineService_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <OnlineService> ] ?
+    )
+}
+
+<OnlineServiceFacet> CLOSED {
+    (  $<OnlineServiceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          action:location @location:Location ? ;
+          <inetLocation> @<ObservableObject> ? ;
+          rdfs:label @linkml:String ?
+       ) ;
+       rdf:type [ <OnlineServiceFacet> ] ?
+    )
+}
+
+<OperatingSystem> CLOSED {
+    (  $<OperatingSystem_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <OperatingSystem> ] ?
+    )
+}
+
+<OperatingSystemFacet> CLOSED {
+    (  $<OperatingSystemFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <manufacturer> @identity:Identity ? ;
+          <environmentVariables> @types:Dictionary ? ;
+          <isLimitAdTrackingEnabled> @core:BooleanType ? ;
+          <installDate> @linkml:Datetime ? ;
+          <bitness> @linkml:String ? ;
+          <version> @linkml:String ? ;
+          <advertisingID> @linkml:String *
+       ) ;
+       rdf:type [ <OperatingSystemFacet> ] ?
+    )
+}
+
+identity:Organization CLOSED {
+    (  $identity:Organization_tes (  &identity:Identity_tes ;
+          rdf:type [ identity:Identity ] ?
+       ) ;
+       rdf:type [ identity:Organization ] ?
+    )
+}
+
+identity:OrganizationDetailsFacet CLOSED {
+    (  $identity:OrganizationDetailsFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:OrganizationDetailsFacet ] ?
+    )
+}
+
+<PathRelationFacet> CLOSED {
+    (  $<PathRelationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <path> @linkml:String *
+       ) ;
+       rdf:type [ <PathRelationFacet> ] ?
+    )
+}
+
+pattern:Pattern  (
+    CLOSED {
+       (  $pattern:Pattern_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ?
+          ) ;
+          rdf:type [ pattern:Pattern ] ?
+       )
+    } OR @pattern:LogicalPattern
+)
+
+pattern:PatternExpression CLOSED {
+    (  $pattern:PatternExpression_tes (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ?
+       ) ;
+       rdf:type [ pattern:PatternExpression ] ?
+    )
+}
+
+<PaymentCard> CLOSED {
+    (  $<PaymentCard_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <PaymentCard> ] ?
+    )
+}
+
+<PDFFile> CLOSED {
+    (  $<PDFFile_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <PDFFile> ] ?
+    )
+}
+
+<PDFFileFacet> CLOSED {
+    (  $<PDFFileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <documentInformationDictionary> @types:ControlledDictionary ? ;
+          <isOptimized> @core:BooleanType ? ;
+          <pdfCreationDate> @linkml:Datetime ? ;
+          <pdfModDate> @linkml:Datetime ? ;
+          <pdfId1> @linkml:String ? ;
+          <version> @linkml:String ? ;
+          <pdfId0> @linkml:String *
+       ) ;
+       rdf:type [ <PDFFileFacet> ] ?
+    )
+}
+
+identity:Person CLOSED {
+    (  $identity:Person_tes (  &identity:Identity_tes ;
+          rdf:type [ identity:Identity ] ?
+       ) ;
+       rdf:type [ identity:Person ] ?
+    )
+}
+
+identity:PersonalDetailsFacet CLOSED {
+    (  $identity:PersonalDetailsFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:PersonalDetailsFacet ] ?
+    )
+}
+
+<PhoneAccount> CLOSED {
+    (  $<PhoneAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <PhoneAccount> ] ?
+    )
+}
+
+<PhoneAccountFacet> CLOSED {
+    (  $<PhoneAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <phoneNumber> @linkml:String ?
+       ) ;
+       rdf:type [ <PhoneAccountFacet> ] ?
+    )
+}
+
+identity:PhysicalInfoFacet CLOSED {
+    (  $identity:PhysicalInfoFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:PhysicalInfoFacet ] ?
+    )
+}
+
+<Pipe> CLOSED {
+    (  $<Pipe_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Pipe> ] ?
+    )
+}
+
+<Post> CLOSED {
+    (  $<Post_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <Post> ] ?
+    )
+}
+
+<Process>  (
+    CLOSED {
+       (  $<Process_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Process> ] ?
+       )
+    } OR @<UNIXProcess> OR @<WindowsProcess>
+)
+
+<ProcessFacet> CLOSED {
+    (  $<ProcessFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <binary> @<ObservableObject> ? ;
+          <creatorUser> @<ObservableObject> ? ;
+          <parent> @<ObservableObject> ? ;
+          <environmentVariables> @types:Dictionary ? ;
+          <isHidden> @core:BooleanType ? ;
+          <exitTime> @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <exitStatus> @linkml:Integer ? ;
+          <pid> @linkml:Integer ? ;
+          <currentWorkingDirectory> @linkml:String ? ;
+          <status> @linkml:String ? ;
+          <arguments> @linkml:String *
+       ) ;
+       rdf:type [ <ProcessFacet> ] ?
+    )
+}
+
+<ProcessThread>  (
+    CLOSED {
+       (  $<ProcessThread_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <ProcessThread> ] ?
+       )
+    } OR @<WindowsThread>
+)
+
+<Profile> CLOSED {
+    (  $<Profile_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Profile> ] ?
+    )
+}
+
+<ProfileFacet> CLOSED {
+    (  $<ProfileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <profileIdentity> @identity:Identity ? ;
+          <contactAddress> @<ContactAddress> ? ;
+          <contactEmail> @<ContactEmail> ? ;
+          <contactMessaging> @<ContactMessaging> ? ;
+          <contactPhone> @<ContactPhone> ? ;
+          <contactURL> @<ContactURL> ? ;
+          <profileAccount> @<ObservableObject> ? ;
+          <profileService> @<ObservableObject> ? ;
+          <profileWebsite> @<ObservableObject> ? ;
+          <profileCreated> @linkml:Datetime ? ;
+          rdfs:label @linkml:String ? ;
+          <displayName> @linkml:String ?
+       ) ;
+       rdf:type [ <ProfileFacet> ] ?
+    )
+}
+
+<PropertiesEnumeratedEffectFacet> CLOSED {
+    (  $<PropertiesEnumeratedEffectFacet_tes> (  &<DefinedEffectFacet_tes> ;
+          rdf:type [ <DefinedEffectFacet> ] ? ;
+          &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <properties> @linkml:String ?
+       ) ;
+       rdf:type [ <PropertiesEnumeratedEffectFacet> ] ?
+    )
+}
+
+<PropertyReadEffectFacet> CLOSED {
+    (  $<PropertyReadEffectFacet_tes> (  &<DefinedEffectFacet_tes> ;
+          rdf:type [ <DefinedEffectFacet> ] ? ;
+          <propertyName> @linkml:String ? ;
+          core:value @linkml:String ?
+       ) ;
+       rdf:type [ <PropertyReadEffectFacet> ] ?
+    )
+}
+
+<ProtocolConverter> CLOSED {
+    (  $<ProtocolConverter_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <ProtocolConverter> ] ?
+    )
+}
+
+identity:QualificationFacet CLOSED {
+    (  $identity:QualificationFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:QualificationFacet ] ?
+    )
+}
+
+<RasterPicture> CLOSED {
+    (  $<RasterPicture_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <RasterPicture> ] ?
+    )
+}
+
+<RasterPictureFacet> CLOSED {
+    (  $<RasterPictureFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <camera> @<ObservableObject> ? ;
+          <bitsPerPixel> @linkml:Integer ? ;
+          <pictureHeight> @linkml:Integer ? ;
+          <pictureWidth> @linkml:Integer ? ;
+          <imageCompressionMethod> @linkml:String ? ;
+          <pictureType> @linkml:String ?
+       ) ;
+       rdf:type [ <RasterPictureFacet> ] ?
+    )
+}
+
+<RecoveredObject> CLOSED {
+    (  $<RecoveredObject_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <RecoveredObject> ] ?
+    )
+}
+
+<RecoveredObjectFacet> CLOSED {
+    (  $<RecoveredObjectFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <contentRecoveredStatus> @vocabulary:RecoveredObjectStatusEnum ? ;
+          <metadataRecoveredStatus> @vocabulary:RecoveredObjectStatusEnum ? ;
+          <nameRecoveredStatus> @vocabulary:RecoveredObjectStatusEnum ?
+       ) ;
+       rdf:type [ <RecoveredObjectFacet> ] ?
+    )
+}
+
+<RegistryDatatype> CLOSED {
+    (  $<RegistryDatatype_tes> rdf:type . * ;
+       rdf:type [ <RegistryDatatype> ] ?
+    )
+}
+
+identity:RelatedIdentityFacet CLOSED {
+    (  $identity:RelatedIdentityFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:RelatedIdentityFacet ] ?
+    )
+}
+
+core:Relationship  (
+    CLOSED {
+       (  $core:Relationship_tes (  &core:UcoObject_tes ;
+             rdf:type [ core:UcoObject ] ? ;
+             core:endTime @linkml:Datetime * ;
+             core:isDirectional @core:BooleanType ;
+             core:kindOfRelationship @linkml:String ? ;
+             core:source @core:UcoObject + ;
+             core:startTime @linkml:Datetime * ;
+             core:target @core:UcoObject
+          ) ;
+          rdf:type [ core:Relationship ] ?
+       )
+    } OR @<ObservableRelationship>
+)
+
+<ReparsePoint> CLOSED {
+    (  $<ReparsePoint_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <ReparsePoint> ] ?
+    )
+}
+
+<SecurityAppliance> CLOSED {
+    (  $<SecurityAppliance_tes> (  &<Appliance_tes> ;
+          rdf:type [ <Appliance> ] ?
+       ) ;
+       rdf:type [ <SecurityAppliance> ] ?
+    )
+}
+
+<Semaphore> CLOSED {
+    (  $<Semaphore_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Semaphore> ] ?
+    )
+}
+
+<SendControlCodeEffectFacet> CLOSED {
+    (  $<SendControlCodeEffectFacet_tes> (  &<DefinedEffectFacet_tes> ;
+          rdf:type [ <DefinedEffectFacet> ] ? ;
+          <controlCode> @linkml:String ?
+       ) ;
+       rdf:type [ <SendControlCodeEffectFacet> ] ?
+    )
+}
+
+<Server> CLOSED {
+    (  $<Server_tes> (  &<Computer_tes> ;
+          rdf:type [ <Computer> ] ?
+       ) ;
+       rdf:type [ <Server> ] ?
+    )
+}
+
+collections:Set CLOSED {
+    (  $collections:Set_tes (  &collections:Collection_tes ;
+          rdf:type [ collections:Collection ] ?
+       ) ;
+       rdf:type [ collections:Set ] ?
+    )
+}
+
+<ShopListing> CLOSED {
+    (  $<ShopListing_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <ShopListing> ] ?
+    )
+}
+
+<SIMCard> CLOSED {
+    (  $<SIMCard_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <SIMCard> ] ?
+    )
+}
+
+<SIMCardFacet> CLOSED {
+    (  $<SIMCardFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <carrier> @identity:Identity ? ;
+          <storageCapacityInBytes> @linkml:Integer ? ;
+          <ICCID> @linkml:String ? ;
+          <IMSI> @linkml:String ? ;
+          <PIN> @linkml:String ? ;
+          <PUK> @linkml:String ? ;
+          <SIMForm> @linkml:String ? ;
+          <SIMType> @linkml:String ?
+       ) ;
+       rdf:type [ <SIMCardFacet> ] ?
+    )
+}
+
+location:SimpleAddressFacet CLOSED {
+    (  $location:SimpleAddressFacet_tes (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          location:addressType @linkml:String ? ;
+          location:country @linkml:String ? ;
+          location:locality @linkml:String ? ;
+          location:postalCode @linkml:String ? ;
+          location:region @linkml:String ? ;
+          location:street @linkml:String ?
+       ) ;
+       rdf:type [ location:SimpleAddressFacet ] ?
+    )
+}
+
+identity:SimpleNameFacet CLOSED {
+    (  $identity:SimpleNameFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ? ;
+          identity:familyName @linkml:String * ;
+          identity:givenName @linkml:String * ;
+          identity:honorificPrefix @linkml:String * ;
+          identity:honorificSuffix @linkml:String *
+       ) ;
+       rdf:type [ identity:SimpleNameFacet ] ?
+    )
+}
+
+<SIPAaddress> CLOSED {
+    (  $<SIPAaddress_tes> (  &<DigitalAddress_tes> ;
+          rdf:type [ <DigitalAddress> ] ?
+       ) ;
+       rdf:type [ <SIPAaddress> ] ?
+    )
+}
+
+<SIPAddressFacet> CLOSED {
+    (  $<SIPAddressFacet_tes> (  &<DigitalAddressFacet_tes> ;
+          rdf:type [ <DigitalAddressFacet> ] ?
+       ) ;
+       rdf:type [ <SIPAddressFacet> ] ?
+    )
+}
+
+<SmartDevice>  (
+    @<SmartPhone> OR @<WearableDevice>
+)
+
+<SmartDevice_struct> {
+    (  $<SmartDevice_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <SmartDevice> ] ?
+    )
+}
+
+<SmartPhone>  (
+    CLOSED {
+       (  $<SmartPhone_tes> (  &<SmartDevice_tes> ;
+             rdf:type [ <SmartDevice> ] ? ;
+             &<MobilePhone_tes> ;
+             rdf:type [ <MobilePhone> ] ? ;
+             &<Computer_tes> ;
+             rdf:type [ <Computer> ] ?
+          ) ;
+          rdf:type [ <SmartPhone> ] ?
+       )
+    } OR @<BlackBerryPhone>
+)
+
+<SMSMessage> CLOSED {
+    (  $<SMSMessage_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <SMSMessage> ] ?
+    )
+}
+
+<SMSMessageFacet> CLOSED {
+    (  $<SMSMessageFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <isRead> @core:BooleanType ?
+       ) ;
+       rdf:type [ <SMSMessageFacet> ] ?
+    )
+}
+
+<Snapshot> CLOSED {
+    (  $<Snapshot_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <Snapshot> ] ?
+    )
+}
+
+<Socket> CLOSED {
+    (  $<Socket_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <Socket> ] ?
+    )
+}
+
+<SocketAddress> CLOSED {
+    (  $<SocketAddress_tes> (  &<Address_tes> ;
+          rdf:type [ <Address> ] ?
+       ) ;
+       rdf:type [ <SocketAddress> ] ?
+    )
+}
+
+<Software>  (
+    CLOSED {
+       (  $<Software_tes> (  &<ObservableObject_tes> ;
+             rdf:type [ <ObservableObject> ] ?
+          ) ;
+          rdf:type [ <Software> ] ?
+       )
+    } OR @<ConfiguredSoftware>
+)
+
+<SoftwareFacet> CLOSED {
+    (  $<SoftwareFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <manufacturer> @identity:Identity ? ;
+          <cpeid> @linkml:String ? ;
+          <language> @linkml:String ? ;
+          <swid> @linkml:String ? ;
+          <version> @linkml:String ?
+       ) ;
+       rdf:type [ <SoftwareFacet> ] ?
+    )
+}
+
+<SQLiteBlob> CLOSED {
+    (  $<SQLiteBlob_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <SQLiteBlob> ] ?
+    )
+}
+
+<SQLiteBlobFacet> CLOSED {
+    (  $<SQLiteBlobFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <rowIndex> @<PositiveIntegerType> * ;
+          <columnName> @linkml:String ? ;
+          <rowCondition> @linkml:String ? ;
+          <tableName> @linkml:String ?
+       ) ;
+       rdf:type [ <SQLiteBlobFacet> ] ?
+    )
+}
+
+<StateChangeEffectFacet> CLOSED {
+    (  $<StateChangeEffectFacet_tes> (  &<DefinedEffectFacet_tes> ;
+          rdf:type [ <DefinedEffectFacet> ] ? ;
+          <newObject> @<ObservableObject> ? ;
+          <oldObject> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <StateChangeEffectFacet> ] ?
+    )
+}
+
+<StorageMedium> CLOSED {
+    (  $<StorageMedium_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <StorageMedium> ] ?
+    )
+}
+
+<SymbolicLink> CLOSED {
+    (  $<SymbolicLink_tes> (  &<FileSystemObject_tes> ;
+          rdf:type [ <FileSystemObject> ] ?
+       ) ;
+       rdf:type [ <SymbolicLink> ] ?
+    )
+}
+
+<SymbolicLinkFacet> CLOSED {
+    (  $<SymbolicLinkFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <targetFile> @<ObservableObject> ?
+       ) ;
+       rdf:type [ <SymbolicLinkFacet> ] ?
+    )
+}
+
+<TableField> CLOSED {
+    (  $<TableField_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <TableField> ] ?
+    )
+}
+
+<TableFieldFacet> CLOSED {
+    (  $<TableFieldFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <recordFieldIsNull> @core:BooleanType ? ;
+          <recordFieldName> @linkml:String ? ;
+          <tableName> @linkml:String ? ;
+          <tableSchema> @linkml:String ? ;
+          <recordFieldValue> @linkml:String ? ;
+          <recordRowID> @linkml:String ?
+       ) ;
+       rdf:type [ <TableFieldFacet> ] ?
+    )
+}
+
+<Tablet> CLOSED {
+    (  $<Tablet_tes> (  &<Computer_tes> ;
+          rdf:type [ <Computer> ] ? ;
+          &<SmartDevice_tes> ;
+          rdf:type [ <SmartDevice> ] ? ;
+          &<MobileDevice_tes> ;
+          rdf:type [ <MobileDevice> ] ?
+       ) ;
+       rdf:type [ <Tablet> ] ?
+    )
+}
+
+<TaskActionType> CLOSED {
+    (  $<TaskActionType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <iComHandlerAction> @<IComHandlerActionType> ? ;
+          <iExecAction> @<IExecActionType> ? ;
+          <iShowMessageAction> @<IShowMessageActionType> ? ;
+          <iEmailAction> @<ObservableObject> ? ;
+          <actionID> @linkml:String ? ;
+          <actionType> @vocabulary:TaskActionTypeEnum ?
+       ) ;
+       rdf:type [ <TaskActionType> ] ?
+    )
+}
+
+<TCPConnection> CLOSED {
+    (  $<TCPConnection_tes> (  &<NetworkConnection_tes> ;
+          rdf:type [ <NetworkConnection> ] ?
+       ) ;
+       rdf:type [ <TCPConnection> ] ?
+    )
+}
+
+<TCPConnectionFacet> CLOSED {
+    (  $<TCPConnectionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <sourceFlags> @core:HexBinaryType * ;
+          <destinationFlags> @linkml:String *
+       ) ;
+       rdf:type [ <TCPConnectionFacet> ] ?
+    )
+}
+
+collections:Thing  (
+    @collections:CoItem OR @collections:Collection
+)
+
+collections:Thing_struct {
+    (  $collections:Thing_tes rdf:type . * ;
+       rdf:type [ collections:Thing ] ?
+    )
+}
+
+types:Thread CLOSED {
+    (  $types:Thread_tes (  &collections:Bag_tes ;
+          rdf:type [ collections:Bag ] ? ;
+          &core:UcoThing_tes ;
+          rdf:type [ core:UcoThing ] ?
+       ) ;
+       rdf:type [ types:Thread ] ?
+    )
+}
+
+types:ThreadItem CLOSED {
+    (  $types:ThreadItem_tes (  &core:UcoThing_tes ;
+          rdf:type [ core:UcoThing ] ?
+       ) ;
+       rdf:type [ collections:CoItem ] ?
+    )
+}
+
+<TriggerType> CLOSED {
+    (  $<TriggerType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <isEnabled> @core:BooleanType ? ;
+          <triggerBeginTime> @linkml:Datetime ? ;
+          <triggerEndTime> @linkml:Datetime ? ;
+          <triggerDelay> @linkml:String ? ;
+          <triggerMaxRunTime> @linkml:String ? ;
+          <triggerSessionChangeType> @linkml:String ? ;
+          <triggerFrequency> @vocabulary:TriggerFrequencyEnum ? ;
+          <triggerType> @vocabulary:TriggerTypeEnum ?
+       ) ;
+       rdf:type [ <TriggerType> ] ?
+    )
+}
+
+<Tweet> CLOSED {
+    (  $<Tweet_tes> (  &<Message_tes> ;
+          rdf:type [ <Message> ] ?
+       ) ;
+       rdf:type [ <Tweet> ] ?
+    )
+}
+
+<TwitterProfileFacet> CLOSED {
+    (  $<TwitterProfileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <profileBackgroundLocation> @<ObservableObject> ? ;
+          <profileBannerLocation> @<ObservableObject> ? ;
+          <profileImageLocation> @<ObservableObject> ? ;
+          <profileBackgroundHash> @types:Hash ? ;
+          <profileBannerHash> @types:Hash ? ;
+          <profileImageHash> @types:Hash ? ;
+          <profileIsProtected> @core:BooleanType ? ;
+          <profileIsVerified> @core:BooleanType ? ;
+          <listedCount> @linkml:Integer ? ;
+          <favoritesCount> @core:NonNegativeIntegerType ? ;
+          <followersCount> @core:NonNegativeIntegerType ? ;
+          <friendsCount> @core:NonNegativeIntegerType ? ;
+          <statusesCount> @core:NonNegativeIntegerType ? ;
+          <twitterHandle> @linkml:String ? ;
+          <twitterId> @linkml:String ? ;
+          <userLocationString> @linkml:String ?
+       ) ;
+       rdf:type [ <TwitterProfileFacet> ] ?
+    )
+}
+
+core:UcoInherentCharacterizationThing  (
+    CLOSED {
+       (  $core:UcoInherentCharacterizationThing_tes (  &core:UcoThing_tes ;
+             rdf:type [ core:UcoThing ] ?
+          ) ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ?
+       )
+    } OR @<ApplicationVersion> OR @action:ArrayOfAction OR @configuration:ConfigurationEntry OR @<ContactAddress> OR
+    @<ContactAffiliation> OR @<ContactEmail> OR @<ContactMessaging> OR @<ContactPhone> OR @<ContactProfile> OR @<ContactSIP> OR
+    @<ContactURL> OR @configuration:Dependency OR @types:Dictionary OR @types:DictionaryEntry OR @<EnvironmentVariable> OR
+    @core:ExternalReference OR @<ExtractedString> OR @core:Facet OR @<GlobalFlagType> OR @types:Hash OR @<IComHandlerActionType> OR
+    @<IExecActionType> OR @<IShowMessageActionType> OR @<MimePartType> OR @pattern:PatternExpression OR @<TaskActionType> OR
+    @<TriggerType> OR @<URLHistoryEntry> OR @<WhoisRegistrarInfoType> OR @<WindowsPEFileHheader> OR @<WindowsPEOptionalHeader> OR
+    @<WindowsPESection> OR @<WindowsRegistryValue>
+)
+
+core:UcoObject  (
+    CLOSED {
+       (  $core:UcoObject_tes (  &core:UcoThing_tes ;
+             rdf:type [ core:UcoThing ] ? ;
+             core:createdBy @linkml:String ? ;
+             dcterms:description @linkml:String * ;
+             core:externalReference @linkml:String * ;
+             core:hasFacet @linkml:String * ;
+             core:modifiedTime @linkml:Datetime * ;
+             rdfs:label @linkml:String ? ;
+             core:objectMarking @core:MarkingDefinitionAbstraction * ;
+             core:objectCreatedTime @linkml:Datetime ? ;
+             core:specVersion @linkml:String ? ;
+             core:tag @linkml:String *
+          ) ;
+          rdf:type [ core:UcoObject ] ?
+       )
+    } OR @action:Action OR @core:Assertion OR @core:AttributedName OR @core:Compilation OR @configuration:Configuration OR
+    @core:ControlledVocabulary OR @core:IdentityAbstraction OR @core:Item OR @location:Location OR
+    @core:MarkingDefinitionAbstraction OR @core:ModusOperandi OR @<Observable> OR @pattern:Pattern OR @core:Relationship
+)
+
+core:UcoThing  (
+    @core:UcoInherentCharacterizationThing OR @core:UcoObject
+)
+
+core:UcoThing_struct {
+    (  $core:UcoThing_tes rdf:type . * ;
+       rdf:type [ core:UcoThing ] ?
+    )
+}
+
+<UNIXAccount> CLOSED {
+    (  $<UNIXAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <UNIXAccount> ] ?
+    )
+}
+
+<UNIXAccountFacet> CLOSED {
+    (  $<UNIXAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <gid> @linkml:Integer ? ;
+          <shell> @linkml:String ?
+       ) ;
+       rdf:type [ <UNIXAccountFacet> ] ?
+    )
+}
+
+<UNIXFile> CLOSED {
+    (  $<UNIXFile_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <UNIXFile> ] ?
+    )
+}
+
+<UNIXFilePermissionsFacet> CLOSED {
+    (  $<UNIXFilePermissionsFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ?
+       ) ;
+       rdf:type [ <UNIXFilePermissionsFacet> ] ?
+    )
+}
+
+<UNIXProcess> CLOSED {
+    (  $<UNIXProcess_tes> (  &<Process_tes> ;
+          rdf:type [ <Process> ] ?
+       ) ;
+       rdf:type [ <UNIXProcess> ] ?
+    )
+}
+
+<UNIXProcessFacet> CLOSED {
+    (  $<UNIXProcessFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <openFileDescriptor> @linkml:Integer * ;
+          <ruid> @core:NonNegativeIntegerType *
+       ) ;
+       rdf:type [ <UNIXProcessFacet> ] ?
+    )
+}
+
+<UNIXVolumeFacet> CLOSED {
+    (  $<UNIXVolumeFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <mountPoint> @linkml:String ? ;
+          <options> @linkml:String ?
+       ) ;
+       rdf:type [ <UNIXVolumeFacet> ] ?
+    )
+}
+
+<URL> CLOSED {
+    (  $<URL_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <URL> ] ?
+    )
+}
+
+<URLFacet> CLOSED {
+    (  $<URLFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <host> @<ObservableObject> ? ;
+          <port> @linkml:Integer ? ;
+          <fragment> @linkml:String ? ;
+          <fullValue> @linkml:String ? ;
+          <password> @linkml:String ? ;
+          <path> @linkml:String ? ;
+          <query> @linkml:String ? ;
+          <scheme> @linkml:String ? ;
+          <userName> @linkml:String ?
+       ) ;
+       rdf:type [ <URLFacet> ] ?
+    )
+}
+
+<URLHistory> CLOSED {
+    (  $<URLHistory_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <URLHistory> ] ?
+    )
+}
+
+<URLHistoryEntry> CLOSED {
+    (  $<URLHistoryEntry_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <url> @<ObservableObject> ? ;
+          <referrerURL> @<ObservableObject> ? ;
+          <expirationTime> @linkml:Datetime ? ;
+          <firstVisit> @linkml:Datetime ? ;
+          <lastVisit> @linkml:Datetime ? ;
+          <visitCount> @linkml:Integer ? ;
+          <manuallyEnteredCount> @core:NonNegativeIntegerType ? ;
+          <browserUserProfile> @linkml:String ? ;
+          <hostname> @linkml:String ? ;
+          <pageTitle> @linkml:String ? ;
+          <keywordSearchTerm> @linkml:String ?
+       ) ;
+       rdf:type [ <URLHistoryEntry> ] ?
+    )
+}
+
+<URLHistoryFacet> CLOSED {
+    (  $<URLHistoryFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <browserInformation> @<ObservableObject> ? ;
+          <urlHistoryEntry> @<URLHistoryEntry> *
+       ) ;
+       rdf:type [ <URLHistoryFacet> ] ?
+    )
+}
+
+<URLVisit> CLOSED {
+    (  $<URLVisit_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <URLVisit> ] ?
+    )
+}
+
+<URLVisitFacet> CLOSED {
+    (  $<URLVisitFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <browserInformation> @<ObservableObject> ? ;
+          <fromURLVisit> @<ObservableObject> ? ;
+          <url> @<ObservableObject> ? ;
+          <visitTime> @linkml:Datetime ? ;
+          <visitDuration> @<DurationType> ? ;
+          <urlTransitionType> @vocabulary:URLTransitionTypeEnum ?
+       ) ;
+       rdf:type [ <URLVisitFacet> ] ?
+    )
+}
+
+<UserAccount> CLOSED {
+    (  $<UserAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <UserAccount> ] ?
+    )
+}
+
+<UserAccountFacet> CLOSED {
+    (  $<UserAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <canEscalatePrivs> @core:BooleanType ? ;
+          <isPrivileged> @core:BooleanType ? ;
+          <isServiceAccount> @core:BooleanType ? ;
+          <homeDirectory> @linkml:String ?
+       ) ;
+       rdf:type [ <UserAccountFacet> ] ?
+    )
+}
+
+<UserSession> CLOSED {
+    (  $<UserSession_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <UserSession> ] ?
+    )
+}
+
+<UserSessionFacet> CLOSED {
+    (  $<UserSessionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <effectiveUser> @<ObservableObject> ? ;
+          <loginTime> @linkml:Datetime ? ;
+          <logoutTime> @linkml:Datetime ? ;
+          <effectiveGroup> @linkml:String ? ;
+          <effectiveGroupID> @linkml:String ?
+       ) ;
+       rdf:type [ <UserSessionFacet> ] ?
+    )
+}
+
+<ValuesEnumeratedEffectFacet> CLOSED {
+    (  $<ValuesEnumeratedEffectFacet_tes> (  &<DefinedEffectFacet_tes> ;
+          rdf:type [ <DefinedEffectFacet> ] ? ;
+          <values> @linkml:String ?
+       ) ;
+       rdf:type [ <ValuesEnumeratedEffectFacet> ] ?
+    )
+}
+
+identity:VisaFacet CLOSED {
+    (  $identity:VisaFacet_tes (  &identity:IdentityFacet_tes ;
+          rdf:type [ identity:IdentityFacet ] ?
+       ) ;
+       rdf:type [ identity:VisaFacet ] ?
+    )
+}
+
+<Volume> CLOSED {
+    (  $<Volume_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Volume> ] ?
+    )
+}
+
+<VolumeFacet> CLOSED {
+    (  $<VolumeFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <sectorSize> @linkml:Integer ? ;
+          <volumeID> @linkml:String ?
+       ) ;
+       rdf:type [ <VolumeFacet> ] ?
+    )
+}
+
+<WearableDevice> CLOSED {
+    (  $<WearableDevice_tes> (  &<SmartDevice_tes> ;
+          rdf:type [ <SmartDevice> ] ?
+       ) ;
+       rdf:type [ <WearableDevice> ] ?
+    )
+}
+
+<WebPage> CLOSED {
+    (  $<WebPage_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WebPage> ] ?
+    )
+}
+
+<Whois> CLOSED {
+    (  $<Whois_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Whois> ] ?
+    )
+}
+
+<WhoisContactFacet> CLOSED {
+    (  $<WhoisContactFacet_tes> (  &<ContactFacet_tes> ;
+          rdf:type [ <ContactFacet> ] ? ;
+          <whoisContactType> @vocabulary:WhoisContactTypeEnum ?
+       ) ;
+       rdf:type [ <WhoisContactFacet> ] ?
+    )
+}
+
+<WhoisFacet> CLOSED {
+    (  $<WhoisFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <domainName> @<ObservableObject> ? ;
+          <ipAddress> @<ObservableObject> ? ;
+          <registrantContactInfo> @<ObservableObject> ? ;
+          <serverName> @<ObservableObject> ? ;
+          <nameServer> @<ObservableObject> * ;
+          <registrarInfo> @<WhoisRegistrarInfoType> ? ;
+          <creationDate> @linkml:Datetime ? ;
+          <expirationDate> @linkml:Datetime ? ;
+          <lookupDate> @linkml:Datetime ? ;
+          <updatedDate> @linkml:Datetime ? ;
+          <domainID> @linkml:String ? ;
+          <remarks> @linkml:String ? ;
+          <sponsoringRegistrar> @linkml:String ? ;
+          <registrantIDs> @linkml:String * ;
+          <dnssec> @linkml:String ? ;
+          <status> @vocabulary:WhoisStatusTypeEnum ? ;
+          <regionalInternetRegistry> @linkml:String ?
+       ) ;
+       rdf:type [ <WhoisFacet> ] ?
+    )
+}
+
+<WhoisRegistrarInfoType> CLOSED {
+    (  $<WhoisRegistrarInfoType_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <geoLocationAddress> @location:Location ? ;
+          <contactPhoneNumber> @<ObservableObject> ? ;
+          <emailAddress> @<ObservableObject> ? ;
+          <referralURL> @<ObservableObject> ? ;
+          <whoisServer> @<ObservableObject> ? ;
+          <registrarGUID> @linkml:String ? ;
+          <registrarID> @linkml:String ? ;
+          <registrarName> @linkml:String ?
+       ) ;
+       rdf:type [ <WhoisRegistrarInfoType> ] ?
+    )
+}
+
+<WifiAddress> CLOSED {
+    (  $<WifiAddress_tes> (  &<MACAddress_tes> ;
+          rdf:type [ <MACAddress> ] ?
+       ) ;
+       rdf:type [ <WifiAddress> ] ?
+    )
+}
+
+<WifiAddressFacet> CLOSED {
+    (  $<WifiAddressFacet_tes> (  &<MACAddressFacet_tes> ;
+          rdf:type [ <MACAddressFacet> ] ?
+       ) ;
+       rdf:type [ <WifiAddressFacet> ] ?
+    )
+}
+
+<Wiki> CLOSED {
+    (  $<Wiki_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <Wiki> ] ?
+    )
+}
+
+<WikiArticle> CLOSED {
+    (  $<WikiArticle_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WikiArticle> ] ?
+    )
+}
+
+<WindowsAccount> CLOSED {
+    (  $<WindowsAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <WindowsAccount> ] ?
+    )
+}
+
+<WindowsAccountFacet> CLOSED {
+    (  $<WindowsAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <groups> @linkml:String *
+       ) ;
+       rdf:type [ <WindowsAccountFacet> ] ?
+    )
+}
+
+<WindowsActiveDirectoryAccount> CLOSED {
+    (  $<WindowsActiveDirectoryAccount_tes> (  &<DigitalAccount_tes> ;
+          rdf:type [ <DigitalAccount> ] ?
+       ) ;
+       rdf:type [ <WindowsActiveDirectoryAccount> ] ?
+    )
+}
+
+<WindowsActiveDirectoryAccountFacet> CLOSED {
+    (  $<WindowsActiveDirectoryAccountFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <objectGUID> @linkml:String ? ;
+          <activeDirectoryGroups> @linkml:String *
+       ) ;
+       rdf:type [ <WindowsActiveDirectoryAccountFacet> ] ?
+    )
+}
+
+<WindowsComputerSpecification> CLOSED {
+    (  $<WindowsComputerSpecification_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsComputerSpecification> ] ?
+    )
+}
+
+<WindowsComputerSpecificationFacet> CLOSED {
+    (  $<WindowsComputerSpecificationFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <registeredOrganization> @identity:Identity ? ;
+          <registeredOwner> @identity:Identity ? ;
+          <globalFlagList> @<GlobalFlagType> * ;
+          <windowsDirectory> @<ObservableObject> ? ;
+          <windowsSystemDirectory> @<ObservableObject> ? ;
+          <windowsTempDirectory> @<ObservableObject> ? ;
+          <lastShutdownDate> @linkml:Datetime ? ;
+          <osInstallDate> @linkml:Datetime ? ;
+          <osLastUpgradeDate> @linkml:Datetime ? ;
+          <msProductID> @linkml:String ? ;
+          <msProductName> @linkml:String ? ;
+          <netBIOSName> @linkml:String ? ;
+          <domain> @linkml:String *
+       ) ;
+       rdf:type [ <WindowsComputerSpecificationFacet> ] ?
+    )
+}
+
+<WindowsCriticalSection> CLOSED {
+    (  $<WindowsCriticalSection_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsCriticalSection> ] ?
+    )
+}
+
+<WindowsEvent> CLOSED {
+    (  $<WindowsEvent_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsEvent> ] ?
+    )
+}
+
+<WindowsFileMapping> CLOSED {
+    (  $<WindowsFileMapping_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsFileMapping> ] ?
+    )
+}
+
+<WindowsHandle> CLOSED {
+    (  $<WindowsHandle_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsHandle> ] ?
+    )
+}
+
+<WindowsHook> CLOSED {
+    (  $<WindowsHook_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsHook> ] ?
+    )
+}
+
+<WindowsMailSlot> CLOSED {
+    (  $<WindowsMailSlot_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsMailSlot> ] ?
+    )
+}
+
+<WindowsNetworkShare> CLOSED {
+    (  $<WindowsNetworkShare_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsNetworkShare> ] ?
+    )
+}
+
+<WindowsPEBinaryFile> CLOSED {
+    (  $<WindowsPEBinaryFile_tes> (  &<File_tes> ;
+          rdf:type [ <File> ] ?
+       ) ;
+       rdf:type [ <WindowsPEBinaryFile> ] ?
+    )
+}
+
+<WindowsPEBinaryFileFacet> CLOSED {
+    (  $<WindowsPEBinaryFileFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <optionalHeader> @<WindowsPEOptionalHeader> ? ;
+          <sections> @<WindowsPESection> * ;
+          <fileHeaderHashes> @types:Hash * ;
+          <timeDateStamp> @linkml:Datetime ? ;
+          <pointerToSymbolTable> @core:HexBinaryType * ;
+          <numberOfSections> @linkml:Integer ? ;
+          <numberOfSymbols> @linkml:Integer ? ;
+          <sizeOfOptionalHeader> @linkml:Integer ? ;
+          <impHash> @linkml:String ? ;
+          <peType> @linkml:String ? ;
+          <machine> @linkml:String * ;
+          <characteristics> @<UnsignedShortType> *
+       ) ;
+       rdf:type [ <WindowsPEBinaryFileFacet> ] ?
+    )
+}
+
+<WindowsPEBinaryType> CLOSED {
+    (  $<WindowsPEBinaryType_tes> rdf:type . * ;
+       rdf:type [ <WindowsPEBinaryType> ] ?
+    )
+}
+
+<WindowsPEFileHheader> CLOSED {
+    (  $<WindowsPEFileHheader_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <timeDateStamp> @linkml:Datetime ?
+       ) ;
+       rdf:type [ <WindowsPEFileHheader> ] ?
+    )
+}
+
+<WindowsPEOptionalHeader> CLOSED {
+    (  $<WindowsPEOptionalHeader_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <majorLinkerVersion> @<ByteType> * ;
+          <minorLinkerVersion> @<ByteType> * ;
+          <addressOfEntryPoint> @<UnsignedIntegerType> * ;
+          <baseOfCode> @<UnsignedIntegerType> * ;
+          <checksum> @<UnsignedIntegerType> * ;
+          <fileAlignment> @<UnsignedIntegerType> * ;
+          <imageBase> @<UnsignedIntegerType> * ;
+          <loaderFlags> @<UnsignedIntegerType> * ;
+          <numberOfRVAAndSizes> @<UnsignedIntegerType> * ;
+          <sectionAlignment> @<UnsignedIntegerType> * ;
+          <sizeOfCode> @<UnsignedIntegerType> * ;
+          <sizeOfHeaders> @<UnsignedIntegerType> * ;
+          <sizeOfHeapCommit> @<UnsignedIntegerType> * ;
+          <sizeOfHeapReserve> @<UnsignedIntegerType> * ;
+          <sizeOfImage> @<UnsignedIntegerType> * ;
+          <sizeOfInitializedData> @<UnsignedIntegerType> * ;
+          <sizeOfStackCommit> @<UnsignedIntegerType> * ;
+          <sizeOfStackReserve> @<UnsignedIntegerType> * ;
+          <sizeOfUninitializedData> @<UnsignedIntegerType> * ;
+          <win32VersionValue> @<UnsignedIntegerType> * ;
+          <dllCharacteristics> @<UnsignedShortType> * ;
+          <magic> @<UnsignedShortType> * ;
+          <majorImageVersion> @<UnsignedShortType> * ;
+          <majorOSVersion> @<UnsignedShortType> * ;
+          <majorSubsystemVersion> @<UnsignedShortType> * ;
+          <minorImageVersion> @<UnsignedShortType> * ;
+          <minorOSVersion> @<UnsignedShortType> * ;
+          <minorSubsystemVersion> @<UnsignedShortType> * ;
+          <subsystem> @<UnsignedShortType> *
+       ) ;
+       rdf:type [ <WindowsPEOptionalHeader> ] ?
+    )
+}
+
+<WindowsPESection> CLOSED {
+    (  $<WindowsPESection_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          <hashes> @types:Hash * ;
+          <entropy> @location:DecimalType ? ;
+          collections:size @collections:PositiveInteger ? ;
+          rdfs:label @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsPESection> ] ?
+    )
+}
+
+<WindowsPrefetch> CLOSED {
+    (  $<WindowsPrefetch_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsPrefetch> ] ?
+    )
+}
+
+<WindowsPrefetchFacet> CLOSED {
+    (  $<WindowsPrefetchFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <volume> @<ObservableObject> ? ;
+          <accessedDirectory> @<ObservableObject> * ;
+          <accessedFile> @<ObservableObject> * ;
+          <firstRun> @linkml:Datetime ? ;
+          <lastRun> @linkml:Datetime ? ;
+          <timesExecuted> @linkml:Integer ? ;
+          <applicationFileName> @linkml:String ? ;
+          <prefetchHash> @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsPrefetchFacet> ] ?
+    )
+}
+
+<WindowsProcess> CLOSED {
+    (  $<WindowsProcess_tes> (  &<Process_tes> ;
+          rdf:type [ <Process> ] ?
+       ) ;
+       rdf:type [ <WindowsProcess> ] ?
+    )
+}
+
+<WindowsProcessFacet> CLOSED {
+    (  $<WindowsProcessFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <startupInfo> @types:Dictionary ? ;
+          <aslrEnabled> @core:BooleanType ? ;
+          <depEnabled> @core:BooleanType ? ;
+          <ownerSID> @linkml:String ? ;
+          <priority> @linkml:String ? ;
+          <windowTitle> @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsProcessFacet> ] ?
+    )
+}
+
+<WindowsRegistryHive> CLOSED {
+    (  $<WindowsRegistryHive_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsRegistryHive> ] ?
+    )
+}
+
+<WindowsRegistryHiveFacet> CLOSED {
+    (  $<WindowsRegistryHiveFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <hiveType> @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsRegistryHiveFacet> ] ?
+    )
+}
+
+<WindowsRegistryKey> CLOSED {
+    (  $<WindowsRegistryKey_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsRegistryKey> ] ?
+    )
+}
+
+<WindowsRegistrykeyFacet> CLOSED {
+    (  $<WindowsRegistrykeyFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <creator> @<ObservableObject> ? ;
+          <registryValues> @<WindowsRegistryValue> * ;
+          core:modifiedTime @linkml:Datetime ? ;
+          <numberOfSubkeys> @linkml:Integer ? ;
+          types:key @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsRegistrykeyFacet> ] ?
+    )
+}
+
+<WindowsRegistryValue> CLOSED {
+    (  $<WindowsRegistryValue_tes> (  &core:UcoInherentCharacterizationThing_tes ;
+          rdf:type [ core:UcoInherentCharacterizationThing ] ? ;
+          rdfs:label @linkml:String ? ;
+          <data> @linkml:String ? ;
+          <dataType> @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsRegistryValue> ] ?
+    )
+}
+
+<WindowsService> CLOSED {
+    (  $<WindowsService_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsService> ] ?
+    )
+}
+
+<WindowsServiceFacet> CLOSED {
+    (  $<WindowsServiceFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <displayName> @linkml:String ? ;
+          <groupName> @linkml:String ? ;
+          <serviceName> @linkml:String ? ;
+          <servicStatus> @linkml:String ? ;
+          <serviceType> @linkml:String ? ;
+          <startCommandLine> @linkml:String ? ;
+          <startType> @linkml:String ? ;
+          <descriptions> @linkml:String *
+       ) ;
+       rdf:type [ <WindowsServiceFacet> ] ?
+    )
+}
+
+<WindowsServiceStartType> CLOSED {
+    (  $<WindowsServiceStartType_tes> rdf:type . * ;
+       rdf:type [ <WindowsServiceStartType> ] ?
+    )
+}
+
+<WindowsServiceStatus> CLOSED {
+    (  $<WindowsServiceStatus_tes> rdf:type . * ;
+       rdf:type [ <WindowsServiceStatus> ] ?
+    )
+}
+
+<WindowsServiceType> CLOSED {
+    (  $<WindowsServiceType_tes> rdf:type . * ;
+       rdf:type [ <WindowsServiceType> ] ?
+    )
+}
+
+<WindowsSystemRestore> CLOSED {
+    (  $<WindowsSystemRestore_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsSystemRestore> ] ?
+    )
+}
+
+<WindowsTask> CLOSED {
+    (  $<WindowsTask_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsTask> ] ?
+    )
+}
+
+<WindowsTaskFacet> CLOSED {
+    (  $<WindowsTaskFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <account> @<ObservableObject> ? ;
+          <application> @<ObservableObject> ? ;
+          <workItemData> @<ObservableObject> ? ;
+          <workingDirectory> @<ObservableObject> ? ;
+          <actionList> @<TaskActionType> * ;
+          <triggerList> @linkml:String * ;
+          <mostRecentRunTime> @linkml:Datetime ? ;
+          <nextRunTime> @linkml:Datetime ? ;
+          <observableCreatedTime> @linkml:Datetime ? ;
+          <exitCode> @linkml:Integer ? ;
+          <maxRunTime> @linkml:Integer ? ;
+          <accountLogonType> @linkml:String ? ;
+          <accountRunLevel> @linkml:String ? ;
+          <imageName> @linkml:String ? ;
+          <parameters> @linkml:String ? ;
+          <taskComment> @linkml:String ? ;
+          <taskCreator> @linkml:String ? ;
+          <flags> @vocabulary:TaskFlagEnum ? ;
+          <priority> @vocabulary:TaskPriorityEnum ? ;
+          <status> @vocabulary:TaskStatusEnum ?
+       ) ;
+       rdf:type [ <WindowsTaskFacet> ] ?
+    )
+}
+
+<WindowsThread> CLOSED {
+    (  $<WindowsThread_tes> (  &<ProcessThread_tes> ;
+          rdf:type [ <ProcessThread> ] ?
+       ) ;
+       rdf:type [ <WindowsThread> ] ?
+    )
+}
+
+<WindowsThreadFacet> CLOSED {
+    (  $<WindowsThreadFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <creationTime> @linkml:Datetime ? ;
+          <parameterAddress> @core:HexBinaryType * ;
+          <startAddress> @core:HexBinaryType * ;
+          <priority> @linkml:String ? ;
+          <stackSize> @core:NonNegativeIntegerType * ;
+          <threadID> @core:NonNegativeIntegerType * ;
+          core:context @linkml:String ? ;
+          <runningStatus> @linkml:String ? ;
+          <securityAttributes> @linkml:String ? ;
+          <creationFlags> @<UnsignedIntegerType> *
+       ) ;
+       rdf:type [ <WindowsThreadFacet> ] ?
+    )
+}
+
+<WindowsVolumeFacet> CLOSED {
+    (  $<WindowsVolumeFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <driveLetter> @linkml:String ? ;
+          <driveType> @vocabulary:WindowsDriveTypeEnum ? ;
+          <windowsVolumeAttributes> @linkml:String ?
+       ) ;
+       rdf:type [ <WindowsVolumeFacet> ] ?
+    )
+}
+
+<WindowsWaitableTime> CLOSED {
+    (  $<WindowsWaitableTime_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <WindowsWaitableTime> ] ?
+    )
+}
+
+<WirelessNetworkConnection> CLOSED {
+    (  $<WirelessNetworkConnection_tes> (  &<NetworkConnection_tes> ;
+          rdf:type [ <NetworkConnection> ] ?
+       ) ;
+       rdf:type [ <WirelessNetworkConnection> ] ?
+    )
+}
+
+<WirelessNetworkConnectionFacet> CLOSED {
+    (  $<WirelessNetworkConnectionFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <baseStation> @linkml:String ? ;
+          <password> @linkml:String ? ;
+          <ssid> @linkml:String ? ;
+          <wirelessNetworkSecurityMode> @vocabulary:WirelessNetworkSecurityModeEnum ?
+       ) ;
+       rdf:type [ <WirelessNetworkConnectionFacet> ] ?
+    )
+}
+
+<WriteBlocker> CLOSED {
+    (  $<WriteBlocker_tes> (  &<Device_tes> ;
+          rdf:type [ <Device> ] ?
+       ) ;
+       rdf:type [ <WriteBlocker> ] ?
+    )
+}
+
+<X509Certificate> CLOSED {
+    (  $<X509Certificate_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <X509Certificate> ] ?
+    )
+}
+
+<X509CertificateFacet> CLOSED {
+    (  $<X509CertificateFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <x509v3extensions> @<X509V3ExtensionsFacet> ? ;
+          <issuerHash> @types:Hash ? ;
+          <subjectHash> @types:Hash ? ;
+          <thumbprintHash> @types:Hash ? ;
+          <isSelfSigned> @core:BooleanType ? ;
+          <validityNotAfter> @linkml:Datetime ? ;
+          <validityNotBefore> @linkml:Datetime ? ;
+          <subjectPublicKeyExponent> @linkml:Integer ? ;
+          <issuer> @linkml:String ? ;
+          <serialNumber> @linkml:String ? ;
+          <signature> @linkml:String ? ;
+          <signatureAlgorithm> @linkml:String ? ;
+          <subject> @linkml:String ? ;
+          <subjectPublicKeyAlgorithm> @linkml:String ? ;
+          <subjectPublicKeyModulus> @linkml:String ? ;
+          <version> @linkml:String ?
+       ) ;
+       rdf:type [ <X509CertificateFacet> ] ?
+    )
+}
+
+<X509V3Certificate> CLOSED {
+    (  $<X509V3Certificate_tes> (  &<ObservableObject_tes> ;
+          rdf:type [ <ObservableObject> ] ?
+       ) ;
+       rdf:type [ <X509V3Certificate> ] ?
+    )
+}
+
+<X509V3ExtensionsFacet> CLOSED {
+    (  $<X509V3ExtensionsFacet_tes> (  &core:Facet_tes ;
+          rdf:type [ core:Facet ] ? ;
+          <privateKeyUsagePeriodNotAfter> @linkml:Datetime ? ;
+          <privateKeyUsagePeriodNotBefore> @linkml:Datetime ? ;
+          <authorityKeyIdentifier> @linkml:String ? ;
+          <basicConstraints> @linkml:String ? ;
+          <certificatePolicies> @linkml:String ? ;
+          <crlDistributionPoints> @linkml:String ? ;
+          <extendedKeyUsage> @linkml:String ? ;
+          <inhibitAnyPolicy> @linkml:String ? ;
+          <issuerAlternativeName> @linkml:String ? ;
+          <keyUsage> @linkml:String ? ;
+          <nameConstraints> @linkml:String ? ;
+          <policyConstraints> @linkml:String ? ;
+          <policyMappings> @linkml:String ? ;
+          <subjectAlternativeName> @linkml:String ? ;
+          <subjectDirectoryAttributes> @linkml:String ? ;
+          <subjectKeyIdentifier> @linkml:String ?
+       ) ;
+       rdf:type [ <X509V3ExtensionsFacet> ] ?
+    )
+}
+
+

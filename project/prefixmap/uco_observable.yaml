@@ -1,0 +1,275 @@
+{
+   "AFC": "http://purl.allotrope.org/ontologies/common#AFC_",
+   "BFO": "http://purl.obolibrary.org/obo/BFO_",
+   "CSO": "https://cso.kmi.open.ac.uk/topics/",
+   "EFO": "http://identifiers.org/efo/",
+   "ERO": "http://purl.obolibrary.org/obo/ERO_",
+   "GSSO": "http://purl.obolibrary.org/obo/GSSO_",
+   "IAO": "http://purl.obolibrary.org/obo/IAO_",
+   "NCIT": "http://purl.obolibrary.org/obo/NCIT_",
+   "OM": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+   "REPR": "https://w3id.org/reproduceme#",
+   "SAN": "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#",
+   "SEPIO": "http://purl.obolibrary.org/obo/SEPIO_",
+   "SIO": "http://identifiers.org/sio/",
+   "SWO": "http://purl.obolibrary.org/obo/SWO_",
+   "WIKIDATA": "http://identifiers.org/wikidata/",
+   "WIKIDATA_PROPERTY": "https://www.wikidata.org/wiki/Property:",
+   "action": "https://w3id.org/lmodel/uco-action/",
+   "co": "http://purl.org/co/",
+   "collections": "https://w3id.org/lmodel/collections/",
+   "configuration": "https://w3id.org/lmodel/uco-configuration/",
+   "core": "https://w3id.org/lmodel/uco-core/",
+   "csrc": "https://csrc.nist.gov/glossary/term/",
+   "dcid": "https://datacommons.org/browser/",
+   "dcterms": "http://purl.org/dc/terms/",
+   "dwc": "https://dwc.tdwg.org/terms/#dc:",
+   "edam.data": "http://edamontology.org/data_",
+   "edam.format": "http://edamontology.org/format_",
+   "gr": "http://purl.org/goodrelations/v1#",
+   "identity": "https://w3id.org/lmodel/uco-identity/",
+   "linkml": "https://w3id.org/linkml/",
+   "lm_core": "https://w3id.org/lmodel/core/",
+   "location": "https://w3id.org/lmodel/uco-location/",
+   "metasat": "https://schema.space/metasat/",
+   "observable": "https://w3id.org/lmodel/uco-observable/",
+   "om": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+   "owl": "http://www.w3.org/2002/07/owl#",
+   "pattern": "https://w3id.org/lmodel/uco-pattern/",
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+   "schema": "http://schema.org/",
+   "schema_collections": "https://w3id.org/lmodel/collections/schema/",
+   "schema_uco_action": "https://w3id.org/lmodel/uco-action/schema/",
+   "schema_uco_configuration": "https://w3id.org/lmodel/uco-configuration/schema/",
+   "schema_uco_core": "https://w3id.org/lmodel/uco-core/schema/",
+   "schema_uco_identity": "https://w3id.org/lmodel/uco-identity/schema/",
+   "schema_uco_location": "https://w3id.org/lmodel/uco-location/schema/",
+   "schema_uco_pattern": "https://w3id.org/lmodel/uco-pattern/schema/",
+   "schema_uco_types": "https://w3id.org/lmodel/uco-types/schema/",
+   "schema_uco_vocabulary": "https://w3id.org/lmodel/uco-vocabulary/schema/",
+   "skos": "http://www.w3.org/2004/02/skos/core#",
+   "sosa": "http://www.w3.org/ns/sosa/",
+   "ssn": "http://www.w3.org/ns/ssn/",
+   "ssn-system": "http://www.w3.org/ns/ssn/systems/",
+   "sumo": "https://w3id.org/sumo/kb/",
+   "types": "https://w3id.org/lmodel/uco-types/",
+   "vocabulary": "https://w3id.org/lmodel/uco-vocabulary/",
+   "wIKIDATA": "http://identifiers.org/wikidata/",
+   "wikidata": "http://identifiers.org/wikidata/",
+   "wikidata.property": "https://www.wikidata.org/wiki/Property:",
+   "wikidata_PROPERTY": "https://www.wikidata.org/wiki/Property:",
+   "wikidata_property": "https://www.wikidata.org/wiki/Property:",
+   "Action": {
+      "@id": "action:Action"
+   },
+   "ActionArgumentFacet": {
+      "@id": "action:ActionArgumentFacet"
+   },
+   "ActionEstimationFacet": {
+      "@id": "action:ActionEstimationFacet"
+   },
+   "ActionFrequencyFacet": {
+      "@id": "action:ActionFrequencyFacet"
+   },
+   "ActionLifecycle": {
+      "@id": "action:ActionLifecycle"
+   },
+   "ActionPattern": {
+      "@id": "action:ActionPattern"
+   },
+   "AddressFacet": {
+      "@id": "identity:AddressFacet"
+   },
+   "AffiliationFacet": {
+      "@id": "identity:AffiliationFacet"
+   },
+   "Annotation": {
+      "@id": "core:Annotation"
+   },
+   "ArrayOfAction": {
+      "@id": "action:ArrayOfAction"
+   },
+   "Assertion": {
+      "@id": "core:Assertion"
+   },
+   "AttributedName": {
+      "@id": "core:AttributedName"
+   },
+   "Bag": {
+      "@id": "collections:Bag"
+   },
+   "BirthInformationFacet": {
+      "@id": "identity:BirthInformationFacet"
+   },
+   "Bundle": {
+      "@id": "core:Bundle"
+   },
+   "CoItem": {
+      "@id": "collections:CoItem"
+   },
+   "Collection": {
+      "@id": "collections:Collection"
+   },
+   "Compilation": {
+      "@id": "core:Compilation"
+   },
+   "ConfidenceFacet": {
+      "@id": "core:ConfidenceFacet"
+   },
+   "Configuration": {
+      "@id": "configuration:Configuration"
+   },
+   "ConfigurationEntry": {
+      "@id": "configuration:ConfigurationEntry"
+   },
+   "ContextualCompilation": {
+      "@id": "core:ContextualCompilation"
+   },
+   "ControlledDictionary": {
+      "@id": "types:ControlledDictionary"
+   },
+   "ControlledDictionaryEntry": {
+      "@id": "types:ControlledDictionaryEntry"
+   },
+   "ControlledVocabulary": {
+      "@id": "core:ControlledVocabulary"
+   },
+   "CountryOfResidenceFacet": {
+      "@id": "identity:CountryOfResidenceFacet"
+   },
+   "Dependency": {
+      "@id": "configuration:Dependency"
+   },
+   "Dictionary": {
+      "@id": "types:Dictionary"
+   },
+   "DictionaryEntry": {
+      "@id": "types:DictionaryEntry"
+   },
+   "EnclosingCompilation": {
+      "@id": "core:EnclosingCompilation"
+   },
+   "EventsFacet": {
+      "@id": "identity:EventsFacet"
+   },
+   "ExternalReference": {
+      "@id": "core:ExternalReference"
+   },
+   "Facet": {
+      "@id": "core:Facet"
+   },
+   "GPSCoordinatesFacet": {
+      "@id": "location:GPSCoordinatesFacet"
+   },
+   "Grouping": {
+      "@id": "core:Grouping"
+   },
+   "Hash": {
+      "@id": "types:Hash"
+   },
+   "IdentifierFacet": {
+      "@id": "identity:IdentifierFacet"
+   },
+   "Identity": {
+      "@id": "identity:Identity"
+   },
+   "IdentityAbstraction": {
+      "@id": "core:IdentityAbstraction"
+   },
+   "IdentityFacet": {
+      "@id": "identity:IdentityFacet"
+   },
+   "Item": {
+      "@id": "core:Item"
+   },
+   "LanguagesFacet": {
+      "@id": "identity:LanguagesFacet"
+   },
+   "LatLongCoordinatesFacet": {
+      "@id": "location:LatLongCoordinatesFacet"
+   },
+   "List": {
+      "@id": "collections:List"
+   },
+   "ListItem": {
+      "@id": "collections:ListItem"
+   },
+   "Location": {
+      "@id": "location:Location"
+   },
+   "LogicalPattern": {
+      "@id": "pattern:LogicalPattern"
+   },
+   "MarkingDefinitionAbstraction": {
+      "@id": "core:MarkingDefinitionAbstraction"
+   },
+   "ModusOperandi": {
+      "@id": "core:ModusOperandi"
+   },
+   "NationalityFacet": {
+      "@id": "identity:NationalityFacet"
+   },
+   "OccupationFacet": {
+      "@id": "identity:OccupationFacet"
+   },
+   "Organization": {
+      "@id": "identity:Organization"
+   },
+   "OrganizationDetailsFacet": {
+      "@id": "identity:OrganizationDetailsFacet"
+   },
+   "Pattern": {
+      "@id": "pattern:Pattern"
+   },
+   "PatternExpression": {
+      "@id": "pattern:PatternExpression"
+   },
+   "Person": {
+      "@id": "identity:Person"
+   },
+   "PersonalDetailsFacet": {
+      "@id": "identity:PersonalDetailsFacet"
+   },
+   "PhysicalInfoFacet": {
+      "@id": "identity:PhysicalInfoFacet"
+   },
+   "QualificationFacet": {
+      "@id": "identity:QualificationFacet"
+   },
+   "RelatedIdentityFacet": {
+      "@id": "identity:RelatedIdentityFacet"
+   },
+   "Relationship": {
+      "@id": "core:Relationship"
+   },
+   "Set": {
+      "@id": "collections:Set"
+   },
+   "SimpleAddressFacet": {
+      "@id": "location:SimpleAddressFacet"
+   },
+   "SimpleNameFacet": {
+      "@id": "identity:SimpleNameFacet"
+   },
+   "Thing": {
+      "@id": "collections:Thing"
+   },
+   "Thread": {
+      "@id": "types:Thread"
+   },
+   "ThreadItem": {
+      "@id": "collections:CoItem"
+   },
+   "UcoInherentCharacterizationThing": {
+      "@id": "core:UcoInherentCharacterizationThing"
+   },
+   "UcoObject": {
+      "@id": "core:UcoObject"
+   },
+   "UcoThing": {
+      "@id": "core:UcoThing"
+   },
+   "VisaFacet": {
+      "@id": "identity:VisaFacet"
+   }
+}
