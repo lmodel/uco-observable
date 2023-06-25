@@ -1,8 +1,8 @@
 # Auto generated from uco_observable.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-04-12T00:05:44
+# Generation date: 2023-06-25T00:20:08
 # Schema: uco-observable
 #
-# id: https://w3id.org/linkmodel/uco-observable
+# id: https://w3id.org/lmodel/uco-observable
 # description:
 # license: https://www.apache.org/licenses/LICENSE-2.0
 
