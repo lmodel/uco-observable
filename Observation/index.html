@@ -473,7 +473,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/linkmodel/uco-observable</li>
+<li>from schema: https://w3id.org/lmodel/uco-observable</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -510,7 +510,7 @@
 description: '"An observation is a temporal perception of an observable."'
 todos:
 - hasValue "observe"
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 exact_mappings:
 - NCIT:C25598
 - wikidata:Q193181
@@ -541,7 +541,7 @@ slot_usage:
 description: '"An observation is a temporal perception of an observable."'
 todos:
 - hasValue "observe"
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 exact_mappings:
 - NCIT:C25598
 - wikidata:Q193181
@@ -568,7 +568,7 @@ attributes:
     name: subaction
     description: '"References to other actions that make up part of a larger more
       complex action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: subaction
     owner: Observation
@@ -578,7 +578,7 @@ attributes:
   environment:
     name: environment
     description: '"The environment wherein an action occurs."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: environment
     owner: Observation
     domain_of:
@@ -587,7 +587,7 @@ attributes:
   performer:
     name: performer
     description: '"The primary performer of an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: performer
     owner: Observation
     domain_of:
@@ -597,7 +597,7 @@ attributes:
     name: error
     description: '"A characterization of the differences between the expected and
       the actual performance of the action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: error
     owner: Observation
@@ -608,7 +608,7 @@ attributes:
   instrument:
     name: instrument
     description: '"The things used to perform an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: instrument
     owner: Observation
@@ -631,7 +631,7 @@ attributes:
   participant:
     name: participant
     description: '"The supporting (non-primary) performers of an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: participant
     owner: Observation
@@ -643,7 +643,7 @@ attributes:
   result:
     name: result
     description: '"The things resulting from performing an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: result
     owner: Observation
@@ -653,7 +653,7 @@ attributes:
   location:
     name: location
     description: '"The locations where an action occurs."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: location
     owner: Observation
@@ -700,7 +700,7 @@ attributes:
   actionCount:
     name: actionCount
     description: '"The number of times that the action was performed."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: actionCount
     owner: Observation
     domain_of:
@@ -710,7 +710,7 @@ attributes:
   actionStatus:
     name: actionStatus
     description: '"The current state of the action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     is_a: ActionStatusTypeVocab
     alias: actionStatus
     owner: Observation

@@ -524,7 +524,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/linkmodel/uco-observable</li>
+<li>from schema: https://w3id.org/lmodel/uco-observable</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -553,7 +553,7 @@
 description: '"An email message facet is a grouping of characteristics unique to a
   message that is an instance of an electronic mail correspondence conformant to the
   internet message format described in RFC 5322 and related RFCs."'
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 rank: 1000
 is_a: Facet
 slots:
@@ -638,7 +638,7 @@ slot_usage:
 description: '"An email message facet is a grouping of characteristics unique to a
   message that is an instance of an electronic mail correspondence conformant to the
   internet message format described in RFC 5322 and related RFCs."'
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 rank: 1000
 is_a: Facet
 slot_usage:
@@ -689,7 +689,7 @@ attributes:
     name: bodyMultipart
     description: '"A list of the MIME parts that make up the email body. This field
       MAY only be used if isMultipart is true."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: bodyMultipart
@@ -700,7 +700,7 @@ attributes:
   application:
     name: application
     description: '"The application associated with this object."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: application
     owner: EmailMessageFacet
@@ -723,7 +723,7 @@ attributes:
   bodyRaw:
     name: bodyRaw
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: bodyRaw
     owner: EmailMessageFacet
@@ -734,7 +734,7 @@ attributes:
   from:
     name: from
     description: '"The phone number of the initiating party."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     broad_mappings:
     - sumo:phoneNumber
     - wikidata:Q214995
@@ -749,7 +749,7 @@ attributes:
   headerRaw:
     name: headerRaw
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: headerRaw
     owner: EmailMessageFacet
@@ -759,7 +759,7 @@ attributes:
   sender:
     name: sender
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: sender
     owner: EmailMessageFacet
@@ -769,7 +769,7 @@ attributes:
   xOriginatingIP:
     name: xOriginatingIP
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: xOriginatingIP
     owner: EmailMessageFacet
@@ -780,7 +780,7 @@ attributes:
     name: bcc
     description: '"Allows the sender of a message to conceal the person entered in
       the BCC field from the other recipients"'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: bcc
@@ -791,7 +791,7 @@ attributes:
   cc:
     name: cc
     description: '"Carbon copy: technique of producing one or more copies simultaneously."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: cc
@@ -802,7 +802,7 @@ attributes:
   references:
     name: references
     description: '"A list of email message identifiers this email relates to."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: references
@@ -813,7 +813,7 @@ attributes:
   to:
     name: to
     description: '"The receiver''s phone number."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: to
@@ -826,7 +826,7 @@ attributes:
   otherHeaders:
     name: otherHeaders
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: otherHeaders
     owner: EmailMessageFacet
@@ -835,7 +835,7 @@ attributes:
     range: Dictionary
   isMimeEncoded:
     name: isMimeEncoded
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: isMimeEncoded
     owner: EmailMessageFacet
@@ -844,7 +844,7 @@ attributes:
     range: boolean type
   isMultipart:
     name: isMultipart
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: isMultipart
     owner: EmailMessageFacet
@@ -853,7 +853,7 @@ attributes:
     range: boolean type
   isRead:
     name: isRead
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: isRead
     owner: EmailMessageFacet
@@ -888,7 +888,7 @@ attributes:
   receivedTime:
     name: receivedTime
     description: '"The date and time at which the message received."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: receivedTime
     owner: EmailMessageFacet
@@ -898,7 +898,7 @@ attributes:
   sentTime:
     name: sentTime
     description: '"The date and time at which the message sent."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: sentTime
     owner: EmailMessageFacet
@@ -910,7 +910,7 @@ attributes:
     name: body
     description: '"Text forming the main content of a printed or digital work (as
       opposed to additional elements such as headlines, images, charts, footnotes)"'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     exact_mappings:
     - wikidata:Q1378314
     rank: 1000
@@ -922,7 +922,7 @@ attributes:
     range: string
   contentDisposition:
     name: contentDisposition
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     broad_mappings:
     - wikidata:Q1149305
     rank: 1000
@@ -934,7 +934,7 @@ attributes:
     range: string
   contentType:
     name: contentType
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     close_mappings:
     - wikidata:P1163
     narrow_mappings:
@@ -950,7 +950,7 @@ attributes:
     name: inReplyTo
     description: '"One of more unique identifiers for identifying the email(s) this
       email is a reply to."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: inReplyTo
     owner: EmailMessageFacet
@@ -960,7 +960,7 @@ attributes:
   messageID:
     name: messageID
     description: '"An unique identifier for the message."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: messageID
     owner: EmailMessageFacet
@@ -971,7 +971,7 @@ attributes:
   priority:
     name: priority
     description: '"The priority of the email."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: priority
     owner: EmailMessageFacet
@@ -988,7 +988,7 @@ attributes:
   subject:
     name: subject
     description: '"The subject of the email."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: subject
     owner: EmailMessageFacet
@@ -1000,7 +1000,7 @@ attributes:
   xMailer:
     name: xMailer
     description: ''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: xMailer
     owner: EmailMessageFacet
@@ -1010,7 +1010,7 @@ attributes:
   categories:
     name: categories
     description: '"Categories applied to the object."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: categories
@@ -1021,7 +1021,7 @@ attributes:
   labels:
     name: labels
     description: '"Named and colored label."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: labels
@@ -1031,7 +1031,7 @@ attributes:
     range: string
   receivedLines:
     name: receivedLines
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: receivedLines

@@ -434,7 +434,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/linkmodel/uco-observable</li>
+<li>from schema: https://w3id.org/lmodel/uco-observable</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -465,7 +465,7 @@ description: '"A Windows Task facet is a grouping of characteristics unique to a
   Windows Task Scheduler). [based on http://msdn.microsoft.com/en-us/library/windows/desktop/aa381311(v=vs.85).aspx]"'
 in_subset:
 - microsoft
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 rank: 1000
 is_a: Facet
 slots:
@@ -533,7 +533,7 @@ description: '"A Windows Task facet is a grouping of characteristics unique to a
   Windows Task Scheduler). [based on http://msdn.microsoft.com/en-us/library/windows/desktop/aa381311(v=vs.85).aspx]"'
 in_subset:
 - microsoft
-from_schema: https://w3id.org/linkmodel/uco-observable
+from_schema: https://w3id.org/lmodel/uco-observable
 rank: 1000
 is_a: Facet
 slot_usage:
@@ -574,7 +574,7 @@ attributes:
     name: account
     description: '"Specifies the account referenced in an event log entry or used
       to run the scheduled task. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381228(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     exact_mappings:
     - sumo:Account
     rank: 1000
@@ -587,7 +587,7 @@ attributes:
   application:
     name: application
     description: '"The application associated with this object."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: application
     owner: WindowsTaskFacet
@@ -611,7 +611,7 @@ attributes:
     name: workItemData
     description: '"Specifies application defined data associated with the scheduled
       task. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381271(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: workItemData
     owner: WindowsTaskFacet
@@ -622,7 +622,7 @@ attributes:
     name: workingDirectory
     description: '''Specifies the workingDirectory for the scheduled task. See also:
       http://msdn.microsoft.com/en-us/library/windows/desktop/aa381878(v=vs.85).aspx'''
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: workingDirectory
     owner: WindowsTaskFacet
@@ -632,7 +632,7 @@ attributes:
   actionList:
     name: actionList
     description: '"Specifies a list of actions to be performed by the scheduled task."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: actionList
@@ -644,7 +644,7 @@ attributes:
     name: triggerList
     description: '"Specifies a set of triggers used by the scheduled task. See also:
       http://msdn.microsoft.com/en-us/library/windows/desktop/aa383264(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     multivalued: true
     alias: triggerList
@@ -656,7 +656,7 @@ attributes:
     name: mostRecentRunTime
     description: '"Specifies the most recent run date/time of this scheduled task.
       See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381254(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: mostRecentRunTime
     owner: WindowsTaskFacet
@@ -667,7 +667,7 @@ attributes:
     name: nextRunTime
     description: '"Specifies the next run date/time of the scheduled task. See also:
       http://msdn.microsoft.com/en-us/library/windows/desktop/aa381257(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: nextRunTime
     owner: WindowsTaskFacet
@@ -680,7 +680,7 @@ attributes:
       was created. This time pertains to an intrinsic characteristic of the observable
       object, and would be consistent across independent characterizations or observations
       of the observable object."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: observableCreatedTime
     owner: WindowsTaskFacet
@@ -701,7 +701,7 @@ attributes:
   exitCode:
     name: exitCode
     description: '"Specifies the last exitCode of the scheduled task. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381245(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: exitCode
     owner: WindowsTaskFacet
@@ -712,7 +712,7 @@ attributes:
     name: maxRunTime
     description: '"Specifies the maximum run time of the scheduled task before terminating,
       in milliseconds. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381874(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: maxRunTime
     owner: WindowsTaskFacet
@@ -723,7 +723,7 @@ attributes:
     name: accountLogonType
     description: '"Specifies the security logon method required to run the tasks associated
       with the account. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa383013(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: accountLogonType
     owner: WindowsTaskFacet
@@ -734,7 +734,7 @@ attributes:
     name: accountRunLevel
     description: '"Specifies the permission level of the account that the task will
       be run at."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: accountRunLevel
     owner: WindowsTaskFacet
@@ -744,7 +744,7 @@ attributes:
   imageName:
     name: imageName
     description: '"Specifies the imageName for the task."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: imageName
     owner: WindowsTaskFacet
@@ -755,7 +755,7 @@ attributes:
     name: parameters
     description: '"Specifies the command line parameters used to launch the scheduled
       task. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381875(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: parameters
     owner: WindowsTaskFacet
@@ -765,7 +765,7 @@ attributes:
   taskComment:
     name: taskComment
     description: '"Specifies a comment for the scheduled task. See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381232(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: taskComment
     owner: WindowsTaskFacet
@@ -776,7 +776,7 @@ attributes:
     name: taskCreator
     description: '"Specifies the name of the creator of the scheduled task. See also:
       http://msdn.microsoft.com/en-us/library/windows/desktop/aa381235(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: taskCreator
     owner: WindowsTaskFacet
@@ -787,7 +787,7 @@ attributes:
     name: flags
     description: '"Specifies any flags that modify the behavior of the scheduled task.
       See also: http://msdn.microsoft.com/en-us/library/windows/desktop/aa381248(v=vs.85).aspx."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: flags
     owner: WindowsTaskFacet
@@ -797,7 +797,7 @@ attributes:
   priority:
     name: priority
     description: '"The priority of the email."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: priority
     owner: WindowsTaskFacet
@@ -811,7 +811,7 @@ attributes:
   status:
     name: status
     description: '"Specifies a list of statuses for a given Whois entry."'
-    from_schema: https://w3id.org/linkmodel/uco-observable
+    from_schema: https://w3id.org/lmodel/uco-observable
     rank: 1000
     alias: status
     owner: WindowsTaskFacet

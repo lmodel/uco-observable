@@ -474,7 +474,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/linkmodel/uco-action</li>
+<li>from schema: https://w3id.org/lmodel/uco-action</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -502,7 +502,7 @@
 <pre><code class="language-yaml">name: ActionLifecycle
 description: '"An action lifecycle is an action pattern consisting of an ordered set
   of multiple actions or subordinate action lifecycles."'
-from_schema: https://w3id.org/linkmodel/uco-action
+from_schema: https://w3id.org/lmodel/uco-action
 is_a: Action
 slots:
 - phase
@@ -571,7 +571,7 @@ slot_usage:
 <pre><code class="language-yaml">name: ActionLifecycle
 description: '"An action lifecycle is an action pattern consisting of an ordered set
   of multiple actions or subordinate action lifecycles."'
-from_schema: https://w3id.org/linkmodel/uco-action
+from_schema: https://w3id.org/lmodel/uco-action
 is_a: Action
 slot_usage:
   phase:
@@ -631,7 +631,7 @@ attributes:
     name: phase
     description: '"The ordered set of actions or sub action-lifecycles that represent
       the action lifecycle."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     is_a: subaction
     alias: phase
     owner: ActionLifecycle
@@ -645,7 +645,7 @@ attributes:
     name: error
     description: '"A characterization of the differences between the expected and
       the actual performance of the action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: error
     owner: ActionLifecycle
@@ -693,7 +693,7 @@ attributes:
   actionCount:
     name: actionCount
     description: '"The number of times that the action was performed."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: actionCount
     owner: ActionLifecycle
     domain_of:
@@ -705,7 +705,7 @@ attributes:
     name: subaction
     description: '"References to other actions that make up part of a larger more
       complex action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: subaction
     owner: ActionLifecycle
@@ -715,7 +715,7 @@ attributes:
   environment:
     name: environment
     description: '"The environment wherein an action occurs."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: environment
     owner: ActionLifecycle
     domain_of:
@@ -724,7 +724,7 @@ attributes:
   performer:
     name: performer
     description: '"The primary performer of an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     alias: performer
     owner: ActionLifecycle
     domain_of:
@@ -733,7 +733,7 @@ attributes:
   instrument:
     name: instrument
     description: '"The things used to perform an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: instrument
     owner: ActionLifecycle
@@ -756,7 +756,7 @@ attributes:
   participant:
     name: participant
     description: '"The supporting (non-primary) performers of an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: participant
     owner: ActionLifecycle
@@ -768,7 +768,7 @@ attributes:
   result:
     name: result
     description: '"The things resulting from performing an action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: result
     owner: ActionLifecycle
@@ -778,7 +778,7 @@ attributes:
   location:
     name: location
     description: '"The locations where an action occurs."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     multivalued: true
     alias: location
     owner: ActionLifecycle
@@ -791,7 +791,7 @@ attributes:
   actionStatus:
     name: actionStatus
     description: '"The current state of the action."'
-    from_schema: https://w3id.org/linkmodel/uco-action
+    from_schema: https://w3id.org/lmodel/uco-action
     is_a: ActionStatusTypeVocab
     alias: actionStatus
     owner: ActionLifecycle
